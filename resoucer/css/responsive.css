@@ -1,0 +1,111 @@
+
+.id-block{
+  margin-top: 16px;
+}
+.dropdown-menu-wide {
+  left: unset; 
+  right: 0;
+  /* Limita a largura do dropdown para não ultrapassar a tela */
+  max-width: calc(100vw - 20px); /* 20px para dar um pequeno espaço de margem */
+  border-radius: 0 0 0.3rem 0.3rem;
+  opacity: 1 !important; /* Remove qualquer transparência */
+  z-index: 1000 !important; /* Garante que o dropdown fique acima de outros elementos */
+    
+  -webkit-box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+  
+}
+.dropdown {
+  position: relative; /* Adiciona contexto de empilhamento */
+  z-index: 1050; /* Garante que o botão do dropdown fique acima de outros elementos */
+}
+@media (min-height: 1024px) and (max-height: 1366px) {
+    html, body {
+        font-size: 22px; 
+    }
+    .simplebar-content-wrapper{
+        font-size: 22px;
+    }
+    .action-button{
+        width: 100%;
+        margin: 4px ;
+    }
+    .button-margin-top-xxl{
+      margin-top: 16px;
+    }
+    .search-input-client{
+      margin-top: 16px;
+    }
+    .modal-dialog {
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #sidebar-menu ul li a{
+      font-size: 16px;
+    }
+}
+
+@media (max-width: 1024px){
+  .action-button{
+      width: 100%;
+      margin: 4px ;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px){
+    .modal {
+      --bs-modal-margin: 1.75rem;
+      --bs-modal-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    }
+    .modal-dialog {
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .modal-sm {
+      --bs-modal-width: 300px;
+    }
+}
+
+@media (max-width: 725px) {
+  .button-margin-top-xxl{
+    margin-top: 16px;
+  }
+
+  .search-input-client{
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 760px) {
+  .button-margin-top-xxl{
+    margin-top: 16px;
+  }
+  .search-input-client{
+    margin-top: 16px;
+  }
+}
+
+.logo .logo-sm-att {
+  display: none;
+}
+
+.sidebar-enable .logo span.logo-sm-att {
+  display: block;
+  margin-right: 40px;
+}
+
+.sidebar-enable.sidebar-collpsed .navbar-logo-box #sidebar-btn {
+  left: -10px;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-brand-box .logo-dark {
+    display: block;
+  }
+  .navbar-brand-box .logo-dark span.logo-sm-att {
+    display: block;
+  }
+  
+}

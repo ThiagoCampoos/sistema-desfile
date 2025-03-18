@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>Lista de Nota Fiscal</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Codebucks" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+        <!-- DataTables -->
+        <link href="assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href="assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- dark layout js -->
+        <script src="assets/js/pages/layout.js"></script>
+
+        <!-- Bootstrap Css -->
+        <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- simplebar css -->
+        <link href="assets/libs/simplebar/simplebar.min.css" rel="stylesheet">
+        <!-- App Css-->
+        <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+        <link href="assets/css/style.css"  rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+         <!-- ========== Left Sidebar / Topbar Start ========== -->
+        <x-sidebar />
+        <!-- Left Sidebar / Topbar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content" >
+            <div class="page-content">
+                <div class="container-fluid">
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Lista de Notas Fiscais</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                  <div class="col-12 mb-5">
+                                    <button class="btn btn-outline-primary float-end" data-bs-toggle="modal" data-bs-target="#modalCadastrarNF">Importar Nota Fiscal</button>
+                                  </div>
+                                  <div class="table-wrapper" style="overflow-x: auto;">
+                                    <table id="alternative-page-datatable" class="table table-striped  nowrap table-scrollable  w-100">
+                                        <thead>
+                                            <tr>
+                                                <th>Situação</th>
+                                                <th>Tomador</th>
+                                                <th>Razão Social</th>
+                                                <th>Emissor</th>
+                                                <th>Número</th>
+                                                <th>RPS</th>
+                                                <th>Nº RPS</th>
+                                                <th>Serviço (R$)</th>
+                                                <th>Desc. Cond(R$)</th>
+                                                <th>B.C. (R$)</th>
+                                                <th>Total (R$)</th>
+                                                <th>Aliq (%)</th>
+                                                <th>ISSQN(R$)</th>
+                                                <th>Retido</th>
+                                                <th>Emissão</th>
+                                                <th>Comp.</th>
+                                                <th>Exigibilidade</th>
+                                                <th>Incidência</th>
+                                                <th>Atividade</th>
+                                                <th>Tipo</th>
+                                                <th>Débito</th>
+                                                <th>Opções</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Normal</td>
+                                                <td>01.540.469/0001-86</td>
+                                                <td>CURUMIMGO LOCAÇÕES LTDA-ME</td>
+                                                <td>36.429.506/0001-00</td>
+                                                <td>20240000000000160</td>
+                                                <td>NÃO</td>
+                                                <td>0</td>
+                                                <td>50,00</td>
+                                                <td>0,00</td>
+                                                <td>50,00</td>
+                                                <td>50,00</td>
+                                                <td>2,00</td>
+                                                <td>1,00</td>
+                                                <td>NÃO</td>
+                                                <td>08/10/2024</td>
+                                                <td>10/2024</td>
+                                                <td>Exigível</td>
+                                                <td>Uberaba/MG</td>
+                                                <td>0103</td>
+                                                <td>Normal</td>
+                                                <td>-</td>
+                                                <td>
+                                                      <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarNF" ></button>
+                                                      <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarNF" ></button>
+                                                      <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirNF"  ></button>
+                                                      <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearNF"  ></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>23.157.506/0001-04</td>
+                                                <td>CONG IRMÃS CARMI MIS STA T MJ JESUS</td>
+                                                <td>36.429.506/0001-00</td>
+                                                <td>20240000000000158</td>
+                                                <td>NÃO</td>
+                                                <td>0</td>
+                                                <td>180,00</td>
+                                                <td>0,00</td>
+                                                <td>180,00</td>
+                                                <td>180,00</td>
+                                                <td>2,00</td>
+                                                <td>3,60</td>
+                                                <td>NÃO</td>
+                                                <td>08/10/2024</td>
+                                                <td>10/2024</td>
+                                                <td>Exigível</td>
+                                                <td>Uberaba/MG</td>
+                                                <td>0103</td>
+                                                <td>Normal</td>
+                                                <td>-</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarNF" ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarNF" ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirNF"  ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearNF"  ></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>23.157.506/0009-61</td>
+                                                <td>CONGREGAÇÃO DAS IRMÃS CARMELIT</td>
+                                                <td>36.429.506/0001-00</td>
+                                                <td>20240000000000158</td>
+                                                <td>NÃO</td>
+                                                <td>0</td>
+                                                <td>328,00</td>
+                                                <td>0,00</td>
+                                                <td>328,00</td>
+                                                <td>328,00</td>
+                                                <td>2,00</td>
+                                                <td>6,56</td>
+                                                <td>NÃO</td>
+                                                <td>08/10/2024</td>
+                                                <td>10/2024</td>
+                                                <td>Exigível</td>
+                                                <td>Uberaba/MG</td>
+                                                <td>0103</td>
+                                                <td>Normal</td>
+                                                <td>-</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarNF" ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarNF" ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirNF"  ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearNF"  ></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>15.487.956/0001-37</td>
+                                                <td>BERENICE LARA PINTO DAMETTO LOCADORA</td>
+                                                <td>36.429.506/0001-00</td>
+                                                <td>20240000000000157</td>
+                                                <td>NÃO</td>
+                                                <td>0</td>
+                                                <td>120,00</td>
+                                                <td>0,00</td>
+                                                <td>120,00</td>
+                                                <td>120,00</td>
+                                                <td>2,00</td>
+                                                <td>2,40</td>
+                                                <td>NÃO</td>
+                                                <td>08/10/2024</td>
+                                                <td>10/2024</td>
+                                                <td>Exigível</td>
+                                                <td>Uberaba/MG</td>
+                                                <td>0103</td>
+                                                <td>Normal</td>
+                                                <td>-</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarNF" ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarNF" ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirNF"  ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearNF"  ></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Normal</td>
+                                                <td>01.540.469/0001-86</td>
+                                                <td>CURUMIMGO LOCAÇÕES LTDA-ME</td>
+                                                <td>36.429.506/0001-00</td>
+                                                <td>20240000000000160</td>
+                                                <td>NÃO</td>
+                                                <td>0</td>
+                                                <td>50,00</td>
+                                                <td>0,00</td>
+                                                <td>50,00</td>
+                                                <td>50,00</td>
+                                                <td>2,00</td>
+                                                <td>1,00</td>
+                                                <td>NÃO</td>
+                                                <td>08/10/2024</td>
+                                                <td>10/2024</td>
+                                                <td>Exigível</td>
+                                                <td>Uberaba/MG</td>
+                                                <td>0103</td>
+                                                <td>Normal</td>
+                                                <td>-</td>
+                                                <td>
+                                                      <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarNF" ></button>
+                                                      <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarNF" ></button>
+                                                      <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirNF"  ></button>
+                                                      <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearNF"  ></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>23.157.506/0001-04</td>
+                                                <td>CONG IRMÃS CARMI MIS STA T MJ JESUS</td>
+                                                <td>36.429.506/0001-00</td>
+                                                <td>20240000000000158</td>
+                                                <td>NÃO</td>
+                                                <td>0</td>
+                                                <td>180,00</td>
+                                                <td>0,00</td>
+                                                <td>180,00</td>
+                                                <td>180,00</td>
+                                                <td>2,00</td>
+                                                <td>3,60</td>
+                                                <td>NÃO</td>
+                                                <td>08/10/2024</td>
+                                                <td>10/2024</td>
+                                                <td>Exigível</td>
+                                                <td>Uberaba/MG</td>
+                                                <td>0103</td>
+                                                <td>Normal</td>
+                                                <td>-</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarNF" ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarNF" ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirNF"  ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearNF"  ></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>23.157.506/0009-61</td>
+                                                <td>CONGREGAÇÃO DAS IRMÃS CARMELIT</td>
+                                                <td>36.429.506/0001-00</td>
+                                                <td>20240000000000158</td>
+                                                <td>NÃO</td>
+                                                <td>0</td>
+                                                <td>328,00</td>
+                                                <td>0,00</td>
+                                                <td>328,00</td>
+                                                <td>328,00</td>
+                                                <td>2,00</td>
+                                                <td>6,56</td>
+                                                <td>NÃO</td>
+                                                <td>08/10/2024</td>
+                                                <td>10/2024</td>
+                                                <td>Exigível</td>
+                                                <td>Uberaba/MG</td>
+                                                <td>0103</td>
+                                                <td>Normal</td>
+                                                <td>-</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarNF" ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarNF" ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirNF"  ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearNF"  ></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>15.487.956/0001-37</td>
+                                                <td>BERENICE LARA PINTO DAMETTO LOCADORA</td>
+                                                <td>36.429.506/0001-00</td>
+                                                <td>20240000000000157</td>
+                                                <td>NÃO</td>
+                                                <td>0</td>
+                                                <td>120,00</td>
+                                                <td>0,00</td>
+                                                <td>120,00</td>
+                                                <td>120,00</td>
+                                                <td>2,00</td>
+                                                <td>2,40</td>
+                                                <td>NÃO</td>
+                                                <td>08/10/2024</td>
+                                                <td>10/2024</td>
+                                                <td>Exigível</td>
+                                                <td>Uberaba/MG</td>
+                                                <td>0103</td>
+                                                <td>Normal</td>
+                                                <td>-</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarNF" ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarNF" ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirNF"  ></button>
+                                                    <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearNF"  ></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                  </div>
+                                  
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                    </div>
+                    <!-- end row-->
+                    <div class="modal fade " id="modalCadastrarNF">
+                        <div class="modal-dialog  modal-dialog-centered">
+                            <div class="modal-content ">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Importar Nota Fiscal</h4><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="col-xl-12" >
+                                            <div class="card">
+                                                <div class="card-body mt-3 mb-3">
+                                                    <div class="input-group">
+                                                        <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload"  accept=".jpg, .jpeg, .png"  />
+                                                        <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Salvar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div><!-- end card body-->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-danger  btn-widest btn-lg float-end" data-bs-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalEditarNF">
+                        <div class="modal-dialog  modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Importar Nova Nota Fiscal</h4><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="col-xl-12" >
+                                            <div class="card">
+                                                <div class="card-body mt-3 mb-3">
+                                                    <div class="input-group">
+                                                        <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload"  accept=".jpg, .jpeg, .png"  />
+                                                        <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Salvar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div><!-- end card body-->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-danger  btn-widest btn-lg float-end" data-bs-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalMostrarNF">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Nota fiscal</h3><button type="button" class="btn btn-sm btn-label-danger  btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="col-xl-12" >
+                                            <div class="card">
+                                                <div class="card-body mt-3 mb-3">
+                                                    <p>Conteúdo da Nota Fiscal vai ser colocado aqui</p>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div><!-- end card body-->
+                                </div>
+                                <div class="modal-footer"><button class="btn btn-outline-danger btn-widest btn-lg float-end" data-bs-dismiss="modal">Cancelar</button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalExcluirNF">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Tem certeza que deseja excluir essa Nota Fiscal?</h3><button type="button" class="btn btn-sm btn-label-danger  btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-footer"><button class="btn btn-primary btn-widest btn-lg float-end">Sim</button> <button class="btn btn-outline-danger btn-widest btn-lg float-end" data-bs-dismiss="modal">Cancelar</button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalBloquearNF">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Tem certeza que deseja bloquear essa Nota Fiscal?</h3><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-footer"><button class="btn btn-primary btn-widest btn-lg float-end">Sim</button> <button class="btn btn-outline-danger btn-widest btn-lg float-end" data-bs-dismiss="modal">Cancelar</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <script>document.write(new Date().getFullYear())</script> © N Soluções Tecnologia.
+                        </div>
+                        <div class="col-sm-6" style="display: none;">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="http://codebucks.in/" target="_blank" class="text-muted">Codebucks</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- end main content-->
+    </div>
+    <!-- END layout-wrapper -->    
+    
+    <!-- Rightbar Sidebar -->
+    <div class="offcanvas offcanvas-end" id="offcanvas-rightsidabar">
+        <div class="card h-100 rounded-0" data-simplebar="init">
+            <div class="card-header bg-light">
+                <h6 class="card-title text-uppercase">Activities</h6>
+                <div class="card-addon">
+                    <button class="btn btn-label-danger" data-bs-dismiss="offcanvas">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="">
+                    <h3 class="card-title">Company summary</h3>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Server Load</p>
+                        <h4 class="fs-16 mb-2">489</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-success" style="width: 49.4%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">49.4% <span>Avg</span></p>
+                    </div>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Members online</p>
+                        <h4 class="fs-16 mb-2">3,450</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-danger" style="width: 34.6%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">34.6% <span>Avg</span></p>
+                    </div>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Today's revenue</p>
+                        <h4 class="fs-16 mb-2">$18,390</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-warning" style="width: 20%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">$37,578 <span>Avg</span></p>
+                    </div>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Expected profit</p>
+                        <h4 class="fs-16 mb-2">$23,461</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-info" style="width: 60%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">$23,461 <span>Avg</span></p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h3 class="card-title">Latest log</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-primary"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">12 new users registered</p>
+                                    <span class="text-muted">Just now</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-success"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">System shutdown <span class="badge badge-label-success">pending</span></p>
+                                    <span class="text-muted">2 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-primary"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">New invoice received</p>
+                                    <span class="text-muted">3 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-danger"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">New order received <span class="badge badge-label-danger">urgent</span></p>
+                                    <span class="text-muted">10 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-warning"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">Production server down</p>
+                                    <span class="text-muted">1 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-info"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">System error <a href="#">check</a></p>
+                                    <span class="text-muted">2 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-secondary"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">DB overloaded 80%</p>
+                                    <span class="text-muted">5 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-success"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">Production server up</p>
+                                    <span class="text-muted">6 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h3 class="card-title">Upcoming activities</h3>
+                    <div class="timeline timeline-timed">
+                        <div class="timeline-item">
+                            <span class="timeline-time">10:00</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-primary"></i></div>
+                            <div class="timeline-content">
+                                <div>
+                                    <span>Meeting with</span>
+                                    <div class="avatar-group ms-2">
+                                        <div class="avatar avatar-circle">
+                                            <img src="assets/images/users/avatar-1.png" alt="Avatar image" class="avatar-2xs" />
+                                        </div>
+                                        <div class="avatar avatar-circle">
+                                            <img src="assets/images/users/avatar-2.png" alt="Avatar image" class="avatar-2xs" />
+                                        </div>
+                                        <div class="avatar avatar-circle">
+                                            <img src="assets/images/users/avatar-3.png" alt="Avatar image" class="avatar-2xs" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">12:45</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-warning"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Lorem ipsum dolor sit amit,consectetur eiusmdd tempor incididunt ut labore et dolore magna elit enim at minim veniam quis nostrud</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">14:00</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-danger"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Received a new feedback on <a href="#">GoFinance</a> App product.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">15:20</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-success"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Lorem ipsum dolor sit amit,consectetur eiusmdd tempor incididunt ut labore et dolore magna.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">17:00</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-info"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Make Deposit <a href="#">USD 700</a> o ESL.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end card-->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
+
+    <!-- Required datatable js -->
+    <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- Responsive examples -->
+    <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+
+    <!-- Datatable init js -->
+   <!--  <script src="assets/js/pages/datatables-base.init.js"></script>-->
+    <script>
+    $(document).ready(function(){$("#datatable").DataTable({language:{paginate:{previous:"<i class='mdi mdi-chevron-left'>",next:"<i class='mdi mdi-chevron-right'>"}},drawCallback:function(){$(".dataTables_paginate > .pagination").addClass("pagination")}}),$("#scroll-sidebar-datatable").DataTable({scrollY:"350px",scrollCollapse:!0,paging:!0,language:{paginate:{previous:"<i class='mdi mdi-chevron-left'>",next:"<i class='mdi mdi-chevron-right'>"}},drawCallback:function(){$(".dataTables_paginate > .pagination").addClass("pagination")}}),$("#alternative-page-datatable").DataTable({
+        "order": [
+            [0, "asc"]
+        ],
+        "buttons": ["excel", "pdf"],
+        "language": {
+            "zeroRecords": "Nada encontrado- refaça sua busca",
+            "info": "10/1000",
+            "infoFiltered": "(filtrado MAX dos registros totais)",
+            "sSearch": "Procurar:",
+            "searchPlaceholder": "Digite sua busca",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Próximo",
+            }
+        },
+        pagingType:"simple_numbers",drawCallback:function(){$(".dataTables_paginate > .pagination").addClass("pagination"),$(".dataTables_length select").addClass("form-select form-select-sm")}}),$("#datatable-1").DataTable({responsive:!0,lengthMenu:[[5,10,25,50,-1],[5,10,25,50,"All"]]}),$(".dataTables_length select").addClass("form-select form-select-sm")});
+
+    </script>
+    <script src="assets/js/function.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    </body>
+
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Nota Fiscal de Serviços Eletrônica (NFS-e)</title>
+    <style>
+        /* Estilos atualizados */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 10px;
+            color: #000;
+            background-color: #fff;
+            font-size: 12px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 14px;
+            margin-top: 20px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+        }
+
+        .section {
+            margin-bottom: 10px;
+        }
+
+        .field-group {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            margin-bottom: 8px;
+        }
+
+        .field-row {
+            display: table-row;
+        }
+
+        .field {
+            display: table-cell;
+            padding: 4px;
+            vertical-align: top;
+            width: 50%;
+        }
+
+        .field-full {
+            display: table-cell;
+            padding: 4px;
+            vertical-align: top;
+            width: 100%;
+        }
+
+        .label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .value {
+            padding-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .fixed-box {
+            height: 80px; /* Altura fixa */
+            overflow: hidden;
+            position: relative;
+        }
+
+        .fixed-box p {
+            margin: 0;
+            line-height: 1.2;
+            text-align: justify;
+        }
+
+        .ellipsis::after {
+            content: '...';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding-left: 10px;
+            background: linear-gradient(to right, transparent, #fff 50%);
+        }
+
+        /* Ajuste para impressão */
+        @media print {
+            body {
+                margin: 0;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Nota Fiscal de Serviços Eletrônica (NFS-e)</h1>
+
+<!-- 1. Informações da Nota -->
+<div class="section">
+    <h2>Informações da Nota</h2>
+    <div class="field-group">
+        <div class="field">
+            <span class="label">Número da Nota:</span>
+            <span class="value">{{ $invoice->invoiceNumber }}</span>
+        </div>
+        @if($invoice->rpsSeries)
+            <div class="field">
+                <span class="label">Série RPS:</span>
+                <span class="value">{{ $invoice->rpsSeries }}</span>
+            </div>
+        @endif
+        @if($invoice->rpsNumber)
+            <div class="field">
+                <span class="label">Número RPS:</span>
+                <span class="value">{{ $invoice->rpsNumber }}</span>
+            </div>
+        @endif
+        <div class="field">
+            <span class="label">Data de Emissão:</span>
+            <span class="value">{{ $invoice->issueDate->format('d/m/Y') }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Data de Competência:</span>
+            <span class="value">{{ $invoice->competenceDate->format('d/m/Y') }}</span>
+        </div>
+    </div>
+</div>
+
+<!-- 2. Dados do Prestador -->
+<div class="section">
+    <h2>Dados do Prestador</h2>
+    <div class="field-group">
+        <div class="field">
+            <span class="label">Nome:</span>
+            <span class="value">{{ $invoice->issuerName }}</span>
+        </div>
+        @if($invoice->issuerTradingName)
+            <div class="field">
+                <span class="label">Nome Fantasia:</span>
+                <span class="value">{{ $invoice->issuerTradingName }}</span>
+            </div>
+        @endif
+    </div>
+    <div class="field-group">
+        <div class="field">
+            <span class="label">CNPJ/CPF:</span>
+            <span class="value">{{ $invoice->issuerDocument }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Inscrição Municipal:</span>
+            <span class="value">{{ $invoice->issuerMunicipalRegistration }}</span>
+        </div>
+    </div>
+    <div class="field-group">
+        <div class="field-full">
+            <span class="label">Endereço:</span>
+            <span class="value">
+                    {{ $invoice->issuerAddressStreet }}, {{ $invoice->issuerAddressNumber }}
+                @if($invoice->issuerAddressComplement)
+                    , {{ $invoice->issuerAddressComplement }}
+                @endif
+                    - {{ $invoice->issuerAddressNeighborhood }},
+                    {{ $invoice->issuerAddressCityCode }} - {{ $invoice->issuerAddressState }},
+                    CEP: {{ $invoice->issuerAddressZipCode }}
+                </span>
+        </div>
+    </div>
+    <div class="field-group">
+        <div class="field">
+            <span class="label">Telefone:</span>
+            <span class="value">{{ $invoice->issuerPhone }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Email:</span>
+            <span class="value">{{ $invoice->issuerEmail }}</span>
+        </div>
+    </div>
+</div>
+
+<!-- 3. Dados do Tomador -->
+<div class="section">
+    <h2>Dados do Tomador</h2>
+    <div class="field-group">
+        <div class="field">
+            <span class="label">Nome/Razão Social:</span>
+            <span class="value">{{ $invoice->recipientName }}</span>
+        </div>
+        <div class="field">
+            <span class="label">CNPJ/CPF:</span>
+            <span class="value">{{ $invoice->recipientDocument }}</span>
+        </div>
+    </div>
+    <div class="field-group">
+        <div class="field-full">
+            <span class="label">Endereço:</span>
+            <span class="value">
+                    {{ $invoice->recipientAddressStreet }}, {{ $invoice->recipientAddressNumber }}
+                    - {{ $invoice->recipientAddressNeighborhood }},
+                    {{ $invoice->recipientAddressCityCode }} - {{ $invoice->recipientAddressState }},
+                    CEP: {{ $invoice->recipientAddressZipCode }}
+                </span>
+        </div>
+    </div>
+    <div class="field-group">
+        <div class="field">
+            <span class="label">Telefone:</span>
+            <span class="value">{{ $invoice->recipientPhone }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Email:</span>
+            <span class="value">{{ $invoice->recipientEmail }}</span>
+        </div>
+    </div>
+</div>
+
+<!-- 4. Retenções Federais -->
+<div class="section">
+    <h2>Retenções Federais</h2>
+    <div class="field-group">
+        <div class="field">
+            <span class="label">IRRF:</span>
+            <span class="value">R$ {{ number_format($invoice->irrf ?? 0, 2, ',', '.') }}</span>
+        </div>
+        <div class="field">
+            <span class="label">PIS:</span>
+            <span class="value">R$ {{ number_format($invoice->pis ?? 0, 2, ',', '.') }}</span>
+        </div>
+    </div>
+    <div class="field-group">
+        <div class="field">
+            <span class="label">COFINS:</span>
+            <span class="value">R$ {{ number_format($invoice->cofins ?? 0, 2, ',', '.') }}</span>
+        </div>
+        <div class="field">
+            <span class="label">CSLL:</span>
+            <span class="value">R$ {{ number_format($invoice->csll ?? 0, 2, ',', '.') }}</span>
+        </div>
+    </div>
+    <div class="field-group">
+        <div class="field">
+            <span class="label">INSS:</span>
+            <span class="value">R$ {{ number_format($invoice->inss ?? 0, 2, ',', '.') }}</span>
+        </div>
+        <div class="field">
+            <!-- Campo vazio para alinhamento -->
+        </div>
+    </div>
+</div>
+
+<!-- 5. Valores -->
+<div class="section">
+    <h2>Valores</h2>
+    <!-- Descrição dos Serviços -->
+    <div class="field-group">
+        <div class="field-full">
+            <span class="label">Descrição dos Serviços:</span>
+            <div class="fixed-box">
+                <p class="@if(strlen(strip_tags($invoice->serviceDescription)) > 500) ellipsis @endif">
+                    {{ Str::limit(strip_tags($invoice->serviceDescription), 500) }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Valores da Nota -->
+    <div class="field-group">
+        <div class="field">
+            <span class="label">Valor dos Serviços:</span>
+            <span class="value">R$ {{ number_format($invoice->serviceAmount, 2, ',', '.') }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Desconto Condicionado:</span>
+            <span class="value">
+                    R$ {{ number_format($invoice->conditionalDiscount ?? 0, 2, ',', '.') }}
+                </span>
+        </div>
+    </div>
+    <div class="field-group">
+        <div class="field">
+            <span class="label">Base de Cálculo:</span>
+            <span class="value">R$ {{ number_format($invoice->calculationBase, 2, ',', '.') }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Alíquota ISS:</span>
+            <span class="value">{{ number_format($invoice->issRate, 2, ',', '.') }}%</span>
+        </div>
+    </div>
+    <div class="field-group">
+        <div class="field">
+            <span class="label">Valor do ISS:</span>
+            <span class="value">R$ {{ number_format($invoice->issTax, 2, ',', '.') }}</span>
+        </div>
+        <div class="field">
+            <span class="label">ISS Retido:</span>
+            <span class="value">{{ $invoice->taxWithheld ? 'Sim' : 'Não' }}</span>
+        </div>
+    </div>
+    <div class="field-group">
+        <div class="field">
+            <span class="label">Valor Total:</span>
+            <span class="value">R$ {{ number_format($invoice->totalAmount, 2, ',', '.') }}</span>
+        </div>
+        <div class="field">
+            <!-- Campo vazio para alinhamento -->
+        </div>
+    </div>
+
+    <!-- Informações Adicionais -->
+    <div class="field-group">
+        <div class="field-full">
+            <span class="label">Informações Adicionais:</span>
+            <div class="fixed-box">
+                <p class="@if(strlen(strip_tags($invoice->otherInformation)) > 500) ellipsis @endif">
+                    {{ Str::limit(strip_tags($invoice->otherInformation), 500) }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

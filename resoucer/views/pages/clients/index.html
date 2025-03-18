@@ -1,0 +1,207 @@
+<x-templates.main title="Listagem de Clientes">
+    <x-organisms.page-header subTitle="Lista de Clientes"/>
+    <div
+        x-data="{
+            clientForm: formComponent(),
+            deleteClientForm: formComponent(),
+            modalClient: @if ($errors->hasBag('form')) true @else false @endif,
+            clientName: '',
+            invoiceManager: ajaxComponent(),
+            expandedRows: {},
+            toggleRow(clientId) {
+                if (this.expandedRows[clientId]) {
+                    this.expandedRows = { ...this.expandedRows, [clientId]: false };
+                } else {
+                    this.expandedRows = Object.keys(this.expandedRows).reduce((acc, id) => {
+                        acc[id] = false;
+                        return acc;
+                    }, {});
+                    this.expandedRows = { ...this.expandedRows, [clientId]: true };
+                    const url = `{{ url('api/clients') }}/${clientId}/invoices`;
+                    this.invoiceManager.setUrl(url);
+                    this.invoiceManager.setMethod('GET');
+                    this.invoiceManager.setHeaders({
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json'
+                    });
+                    this.invoiceManager.fetchData();
+                }
+            }
+        }"
+        x-init="
+            if (modalClient) new bootstrap.Modal($refs.modal_client).show();
+            $refs.modal_client.addEventListener('hidden.bs.modal', () => clientForm.resetForm());
+        "
+    >
+        <div class="row">
+            <div class="col-12">
+                <!-- Cartão Principal -->
+                <x-organisms.card>
+                    <x-molecules.card-body>
+                        <div class="row">
+                            <div class="col-12">
+                                <x-atoms.alert class="m-3"></x-atoms.alert>
+                            </div>
+                            <div class="col-12">
+                                <x-atoms.button
+                                    type="button"
+                                    class="btn-outline-primary float-end mb-3"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modal-client"
+                                    @click="clientForm.resetForm(); clientForm.setAction('{{ route('clients.store') }}');"
+                                >
+                                    Cadastrar Novo Cliente
+                                </x-atoms.button>
+                            </div>
+                            <div class="col-12">
+                                <x-organisms.client-search-form class="row"/>
+                            </div>
+                        </div>
+                    </x-molecules.card-body>
+                </x-organisms.card>
+
+                <!-- Modal de Cliente -->
+                <x-organisms.modal id="modal-client" title="Clientes" x-ref="modal_client" size="modal-lg">
+                    <x-organisms.client-form class="row"></x-organisms.client-form>
+                    <x-slot:footer>
+                        <x-atoms.button type="submit" class="btn-success" id="submit-button" form="client-form">
+                            Confirmar
+                        </x-atoms.button>
+                    </x-slot:footer>
+                </x-organisms.modal>
+
+                <!-- Modal de Confirmação de Deleção -->
+                <x-organisms.modal id="confirm-delete-modal" title="Confirmar Deleção">
+                    <x-organisms.form id="delete-client-form" x-bind:action="deleteClientForm.action">
+                        <input type="hidden" name="_method" x-bind:value="deleteClientForm.method">
+                        <x-atoms.text>
+                            Tem certeza que deseja excluir o cliente <strong x-text="clientName"></strong>?
+                        </x-atoms.text>
+                    </x-organisms.form>
+                    <x-slot:footer>
+                        <x-atoms.button type="button" class="btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </x-atoms.button>
+                        <x-atoms.button type="submit" class="btn-danger" form="delete-client-form">
+                            Confirmar
+                        </x-atoms.button>
+                    </x-slot:footer>
+                </x-organisms.modal>
+
+                <!-- Tabela de Clientes -->
+                <x-organisms.card>
+                    <x-molecules.card-body>
+                        <div x-data="{ ...dateFormatter(), ...valueConverter(), ...statusFormatter() }">
+                            <div class="table-responsive">
+                                <x-organisms.table
+                                    :headers="['Nome', 'Razão Social', 'CPF', 'CNPJ', 'Email', 'Telefone', 'Ações']">
+                                    @foreach($clients as $client)
+                                        <x-molecules.client-row :client="$client"></x-molecules.client-row>
+                                        <tr x-show="expandedRows[{{ $client->id }}]" class="transition">
+                                            <td colspan="7" class="p-0">
+                                                <x-organisms.table
+                                                    :headers="['Nº NF', 'Valor Serviço (R$)', 'Aliq. ISS (%)', 'ISS (R$)', 'Data Emissão', 'Status', 'Ações']">
+                                                    <template
+                                                        x-if="invoiceManager.data.data && invoiceManager.data.data.length > 0">
+                                                        <template x-for="invoice in invoiceManager.data.data"
+                                                                  :key="invoice.id">
+                                                            <tr>
+                                                                <x-atoms.table-cell
+                                                                    x-text="invoice.invoice_number"></x-atoms.table-cell>
+                                                                <x-atoms.table-cell
+                                                                    x-text="toBRLCurrencyFormat(invoice.service_amount)"></x-atoms.table-cell>
+                                                                <x-atoms.table-cell
+                                                                    x-text="invoice.iss_rate"></x-atoms.table-cell>
+                                                                <x-atoms.table-cell
+                                                                    x-text="toBRLCurrencyFormat(invoice.iss_tax)"></x-atoms.table-cell>
+                                                                <x-atoms.table-cell
+                                                                    x-text="toBRDateFormat(invoice.issue_date)"></x-atoms.table-cell>
+
+                                                                <!-- Status do Invoice -->
+                                                                <template x-if="invoice.status === 'pending'">
+                                                                    <x-atoms.table-cell>
+                                                                        <span class="badge bg-warning"
+                                                                              x-text="toPortuguese(invoice.status)"></span>
+                                                                    </x-atoms.table-cell>
+                                                                </template>
+                                                                <template x-if="invoice.status === 'approved'">
+                                                                    <x-atoms.table-cell>
+                                                                        <span class="badge bg-success"
+                                                                              x-text="toPortuguese(invoice.status)"></span>
+                                                                    </x-atoms.table-cell>
+                                                                </template>
+                                                                <template x-if="invoice.status === 'rejected'">
+                                                                    <x-atoms.table-cell>
+                                                                        <span class="badge bg-danger"
+                                                                              x-text="toPortuguese(invoice.status)"></span>
+                                                                    </x-atoms.table-cell>
+                                                                </template>
+
+                                                                <!-- Ações do Invoice -->
+                                                                <x-atoms.table-cell>
+                                                                    <span>
+                                                                        <x-atoms.link
+                                                                            x-bind:href="`{{ url('invoices') }}/${invoice.id}/pdf`"
+                                                                            class="btn btn-label-info fas fa-eye"
+                                                                            title="Visualizar PDF"
+                                                                        ></x-atoms.link>
+                                                                    </span>
+                                                                </x-atoms.table-cell>
+                                                            </tr>
+                                                        </template>
+                                                    </template>
+
+                                                    <!-- Carregando Invoices -->
+                                                    <template x-if="invoiceManager.loading">
+                                                        <tr>
+                                                            <td colspan="7" class="text-center">Carregando...</td>
+                                                        </tr>
+                                                    </template>
+
+                                                    <!-- Nenhuma Invoice Encontrada -->
+                                                    <template
+                                                        x-if="!invoiceManager.loading && (!invoiceManager.data.data || invoiceManager.data.data.length === 0)">
+                                                        <x-atoms.table-row-empty colspan="7">
+                                                            Nenhum usuário encontrado.
+                                                        </x-atoms.table-row-empty>
+                                                    </template>
+                                                </x-organisms.table>
+
+                                                <!-- Paginação das Invoices -->
+                                                <div class="mt-2">
+                                                    <nav aria-label="Page navigation">
+                                                        <ul class="pagination justify-content-center">
+                                                            <template x-for="link in invoiceManager.data.links"
+                                                                      :key="link.label">
+                                                                <li class="page-item" :class="{ active: link.active }">
+                                                                    <a
+                                                                        class="page-link"
+                                                                        href="#"
+                                                                        @click.prevent="invoiceManager.setUrl(link.url); invoiceManager.fetchData();"
+                                                                        x-text="link.label"
+                                                                    ></a>
+                                                                </li>
+                                                            </template>
+                                                        </ul>
+                                                    </nav>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </x-organisms.table>
+                            </div>
+
+                            <!-- Paginação Responsiva -->
+                            <div class="mt-3 d-sm-none d-flex justify-content-end">
+                                {{ $clients->links() }}
+                            </div>
+                            <div class="mt-3 d-none d-sm-block">
+                                {{ $clients->links() }}
+                            </div>
+                        </div>
+                    </x-molecules.card-body>
+                </x-organisms.card>
+            </div>
+        </div>
+    </div>
+</x-templates.main>

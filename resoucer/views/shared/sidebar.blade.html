@@ -1,0 +1,54 @@
+<!-- Sidebar -->
+<div class="sidebar-left">
+    <div data-simplebar class="h-100">
+        <!-- Sidebar Menu -->
+        <div id="sidebar-menu">
+            <ul class="left-menu list-unstyled" id="side-menu">
+                <li>
+                    <a href="dashboard" class="{{ Request::is('dashboard') ? 'active' : '' }}">
+                        <i class="fas fa-desktop"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('clients.index') }}" class="{{ Request::is('listagem_clientes') ? 'active' : ''
+                    }}">
+                        <i class="fas fa-address-card"></i>
+                        <span>Lista de Clientes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('users.index') }}" class="{{ Request::is('users') ? 'active' : '' }}">
+                        <i class="fas fa-users"></i>
+                        <span>Lista de Usuários</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('invoices.index') }}" class="{{ Request::is('invoices') ? 'active' : '' }}">
+                        <i class="fas fa-folder-open"></i>
+                        <span>Notas Fiscais</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="revisional" class="{{ Request::is('revisional') ? 'active' : '' }}">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Revisional</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="detalhes_cliente" class="{{ Request::is('detalhes_cliente') ? 'active' : '' }}">
+                        <i class="fas fa-user"></i>
+                        <span>Detalhes do Cliente</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="analise_nf" class="{{ Request::is('analise_nf') ? 'active' : '' }}">
+                        <i class="fas fa-table"></i>
+                        <span>Análise de Nota Fiscal</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- End Sidebar Menu -->
+    </div>
+</div>

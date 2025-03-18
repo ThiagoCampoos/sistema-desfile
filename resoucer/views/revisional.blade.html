@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>Revisional</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Codebucks" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        
+
+        <!-- DataTables -->
+        <link href="assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href="assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- dark layout js -->
+        <script src="assets/js/pages/layout.js"></script>
+
+        <!-- Bootstrap Css -->
+        <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- simplebar css -->
+        <link href="assets/libs/simplebar/simplebar.min.css" rel="stylesheet">
+        <!-- App Css-->
+        <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <link href="assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+        <link href="assets/css/style.css"  rel="stylesheet" type="text/css" />
+
+    </head>
+    <style>
+        #alternative-page-datatable td:nth-child(2) {
+            width: 20%; /* Define a largura da segunda coluna */
+            text-align: right;
+        }
+
+        #alternative-page-datatable th:nth-child(2) { /* Estiliza o cabeçalho da segunda coluna */
+            width: 20%; /* Define a largura do cabeçalho */
+            text-align: right;
+        }
+    </style>
+    <body>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+         <!-- ========== Left Sidebar / Topbar Start ========== -->
+        <x-sidebar />
+        <!-- Left Sidebar / Topbar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Revisional</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card ">
+                                <div class="card-body  ">
+                                    <form id="regForm" class="row g-2" action="/action_page.php">
+                                         <div class="stepper">
+                                          <div class="step active">
+                                            <div class="circle-revisional">1</div>
+                                            <span class="label-revisional">Etapa 1</span>
+                                          </div>
+                                          <div class="line"></div>
+                                          <div class="step">
+                                            <div class="circle-revisional">2</div>
+                                            <span class="label-revisional">Etapa 2</span>
+                                          </div>
+                                          <div class="line"></div>
+                                          <div class="step">
+                                            <div class="circle-revisional">3</div>
+                                            <span class="label-revisional">Etapa 3</span>
+                                          </div>
+                                        </div>
+                                        <div class="tab" id="tabdata">
+                                            <div class="row g-3">
+                                                <div class="col-md-4">
+                                                    <label for="cliente" class="form-label ">Cliente</label>
+                                                    <select id="cliente" name="cliente" class="form-select  mt-0" required>
+                                                        <option value="" selected="selected">Selecione um cliente</option>
+                                                        <option value="1">Cliente 1</option>
+                                                        <option value="2">Cliente 2</option>
+                                                        <option value="3">Cliente 3</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="contato" class="form-label">Contato</label> <input data-parsley-type="number" type="text" id="contato" class="form-control"  oninput="validateOnInput(this)" required placeholder="Somente números" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="data" class="form-label">Data</label> <input type="text" data-placement="bottom" class="form-control  datepicker" id="data-revisional" oninput="validateOnInput(this)"  required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="nome_fantasia" class="form-label">Nome da Empresa</label> <input type="text" class="form-control" id="nome_fantasia" oninput="validateOnInput(this)" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="cnpj" class="form-label">CNPJ</label> <input type="text" class="form-control " id="cnpj" oninput="validateOnInput(this)" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab">
+                                            <div class="row g-3">
+                                                <div class="col-md-12">
+                                                    <label for="titulo" class="form-label">Título</label> <input  type="text" id="titulo" class="form-control "  oninput="validateOnInput(this)" required />
+                                                </div>
+                                                <label for="detalhes" class="form-label">Detalhes</label>
+                                                <textarea id="elm1" name="area">
+                                                    <p class="" style="text-align: center; color: gray;">Digite seu texto aqui</p>
+                                                </textarea>
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header card-header-bordered">
+                                                            <h3 class="card-title">+ Detalhes</h3>
+                                                            <div class="card-addon">
+                                                                <button class="btn btn-label-info btn-icon" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+                                                                    <i class="fa fa-angle-down"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body collapse" id="collapseExample2">
+                                                            <div class="row mb-4">
+                                                                <div class="col-md-12">
+                                                                    <label for="op_tributaria" class="form-label ">Operação Tributária</label>
+                                                                    <select id="op_tributaria" name="op_tributaria" class="form-select  mt-0" required>
+                                                                        <option value="" selected="selected">Selecione uma Operação</option>
+                                                                        <option value="1">Tipo 1</option>
+                                                                        <option value="2">Tipo 2</option>
+                                                                        <option value="3">Tipo 3</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-4">
+                                                                <div class="col-md-5">
+                                                                    <label for="valor" class="form-label">Valor</label> <input class="form-control" name="valor" id="touchspin-3" type="text" value="55" />
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <label for="percentual" class="form-label">Percentual</label> <input class="form-control" name="percentual" id="touchspin-1" type="text" value="55" />
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="mt-4 p-1">
+                                                                        <button class="btn btn-label-primary w-100">Calcular</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-5">
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-4 float-end">
+                                                                        <div class="form-group-total">
+                                                                            <label for="total3" class=" form-label-total">Total: </label>
+                                                                            <input data-parsley-type="number" type="text" id="total3" class="form-control" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-4">
+                                                                <div class="col-md-5">
+                                                                    <label for="valor2" class="form-label">Análise correta</label> <input class="form-control" name="valor2" id="touchspin-3-1" type="text" value="55" />
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <label for="percentual2" class="form-label">Percentual</label> <input class="form-control" name="percentual2" id="touchspin-1-1" type="text" value="55" />
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="mt-4 p-1">
+                                                                        <button class="btn btn-label-primary w-100">Calcular</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row ">
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-4 float-end">
+                                                                        <div class="form-group-total">
+                                                                            <label for="total4" class=" form-label-total">Total: </label>
+                                                                            <input data-parsley-type="number" type="text" id="total4" class="form-control" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab">
+                                            <div class="col-md-12 mb-3 container-upload">
+                                                <div class="import_box">
+                                                    <div class="input-group">
+                                                        <input type="file" class="form-control  " id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload"  accept=".jpg, .jpeg, .png, .pdf"  />
+                                                        <button class="btn btn-outline-secondary " type="button" id="inputGroupFileAddon04">Salvar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="m-4">
+                                                <table id="alternative-page-datatable" class="table table-hover table-striped dt-responsive  w-100">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Arquivo</th>
+                                                            <th>Ações</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Anexo 1</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirAnexo"  ></button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Anexo 2</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirAnexo"  ></button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Anexo 3</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirAnexo"  ></button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Anexo 4</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirAnexo"  ></button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Anexo 5</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirAnexo"  ></button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Anexo 6</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirAnexo"  ></button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Anexo 7</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirAnexo"  ></button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Anexo 8</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirAnexo"  ></button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Anexo 9</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirAnexo"  ></button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Anexo 10</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirAnexo"  ></button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Anexo 11</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirAnexo"  ></button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Anexo 12</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditarAnexo" ></button>
+                                                                <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirAnexo"  ></button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="col-md-12 mt-4">
+                                                    <div class="col-4 float-end">
+                                                        <button class="btn btn-lg btn-label-primary w-90 float-end">Gerar Relatório</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="overflow:auto;">
+                                          <div style="float:right;">
+                                            <button type="button" id="prevBtn" class="button-revisional mt-4" onclick="nextPrev(-1)">Voltar</button>
+                                            <button type="button" id="nextBtn" class="button-revisional mt-4" onclick="nextPrev(1)">Póximo</button>
+                                          </div>
+                                        </div>
+                                      </form>
+                                      <script>
+                                        var currentTab = 0; // Current tab is set to be the first tab (0)
+                                        showTab(currentTab); // Display the current tab
+                                        
+                                        function showTab(n) {
+                                          // This function will display the specified tab of the form...
+                                          var x = document.getElementsByClassName("tab");
+                                          x[n].style.display = "block";
+                                          //... and fix the Previous/Next buttons:
+                                          if (n == 0) {
+                                            document.getElementById("prevBtn").style.display = "none";
+                                          } else {
+                                            document.getElementById("prevBtn").style.display = "inline";
+                                          }
+                                          if (n == (x.length - 1)) {
+                                            document.getElementById("nextBtn").innerHTML = "Salvar";
+                                          } else {
+                                            document.getElementById("nextBtn").innerHTML = "Próximo";
+                                          }
+                                          //... and run a function that will display the correct step indicator:
+                                          fixStepIndicator(n)
+                                        }
+                                        
+                                        function nextPrev(n) {
+                                          // This function will figure out which tab to display
+                                          var x = document.getElementsByClassName("tab");
+                                          // Exit the function if any field in the current tab is invalid:
+                                          if (n == 1 && !validateForm()) return false;
+                                          // Hide the current tab:
+                                          x[currentTab].style.display = "none";
+                                          // Increase or decrease the current tab by 1:
+                                          currentTab = currentTab + n;
+                                          // if you have reached the end of the form...
+                                          if (currentTab >= x.length) {
+                                            // ... the form gets submitted:
+                                            document.getElementById("regForm").submit();
+                                            return false;
+                                          }
+                                          // Otherwise, display the correct tab:
+                                          showTab(currentTab);
+                                        }
+
+                                        function validateOnInput(inputElement) {
+                                            if (inputElement.value.trim() !== "") {
+                                                inputElement.classList.remove('invalid');
+                                            }
+                                        }
+
+                                        
+                                        function validateForm() {
+                                            var x, y, i, valid = true;
+                                            x = document.getElementsByClassName("tab");
+                                            y = x[currentTab].getElementsByTagName("input");
+                                            var selects = x[currentTab].getElementsByTagName("select");
+
+                                            // A loop that checks every input field in the current tab:
+                                            for (i = 0; i < y.length; i++) {
+                                                if (y[i].value == "") {
+                                                y[i].className += " invalid";
+                                                valid = false;
+                                                }
+                                            }
+
+                                            // Check for select elements
+                                            for (i = 0; i < selects.length; i++) {
+                                                if (selects[i].value == "") {
+                                                selects[i].className += " invalid";
+                                                valid = false;
+                                                }
+                                            }
+
+                                            // If the valid status is true, mark the step as finished and valid:
+                                            if (valid) {
+                                                document.getElementsByClassName("step")[currentTab].className += " finish";
+                                            }
+
+                                            return valid;
+                                        }
+
+                                        
+                                        function fixStepIndicator(n) {
+                                          // This function removes the "active" class of all steps...
+                                          var i, x = document.getElementsByClassName("step");
+                                          for (i = 0; i < x.length; i++) {
+                                            x[i].className = x[i].className.replace(" active", "");
+                                          }
+                                          //... and adds the "active" class on the current step:
+                                          x[n].className += " active";
+                                        }
+                                        </script>
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                    </div>
+                    <!-- end row-->
+                    <div class="modal fade" id="modalMostrarAnexo">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Anexo</h3><button type="button" class="btn btn-sm btn-label-danger  btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="col-xl-12" >
+                                            <div class="card">
+                                                <div class="card-body mt-3 mb-3">
+                                                    <p>Conteúdo do Anexo vai ser colocado aqui</p>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div><!-- end card body-->
+                                </div>
+                                <div class="modal-footer"><button class="btn btn-outline-danger btn-widest btn-lg float-end" data-bs-dismiss="modal">Cancelar</button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade " id="modalEditarAnexo">
+                        <div class="modal-dialog  modal-dialog-centered">
+                            <div class="modal-content ">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Importar Novo Anexo</h4><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="col-xl-12" >
+                                            <div class="card">
+                                                <div class="card-body mt-3 mb-3">
+                                                    <div class="input-group">
+                                                        <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload"  accept=".jpg, .jpeg, .png, .pdf"  />
+                                                        <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Salvar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div><!-- end card body-->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-danger btn-widest btn-lg float-end" data-bs-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalExcluirAnexo">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Tem certeza que deseja excluir esse anexo?</h3><button type="button" class="btn btn-sm btn-label-danger  btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-footer"><button class="btn btn-primary btn-widest btn-lg float-end">Sim</button> <button class="btn btn-outline-danger btn-widest btn-lg float-end" data-bs-dismiss="modal">Cancelar</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <script>document.write(new Date().getFullYear())</script> © N Soluções Tecnologia.
+                        </div>
+                        <div class="col-sm-6" style="display: none;">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="http://codebucks.in/" target="_blank" class="text-muted">Codebucks</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- end main content-->
+    </div>
+    <!-- END layout-wrapper -->    
+    <!-- Rightbar Sidebar -->
+    <div class="offcanvas offcanvas-end" id="offcanvas-rightsidabar">
+        <div class="card h-100 rounded-0" data-simplebar="init">
+            <div class="card-header bg-light">
+                <h6 class="card-title text-uppercase">Activities</h6>
+                <div class="card-addon">
+                    <button class="btn btn-label-danger" data-bs-dismiss="offcanvas">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="">
+                    <h3 class="card-title">Company summary</h3>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Server Load</p>
+                        <h4 class="fs-16 mb-2">489</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-success" style="width: 49.4%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">49.4% <span>Avg</span></p>
+                    </div>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Members online</p>
+                        <h4 class="fs-16 mb-2">3,450</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-danger" style="width: 34.6%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">34.6% <span>Avg</span></p>
+                    </div>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Today's revenue</p>
+                        <h4 class="fs-16 mb-2">$18,390</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-warning" style="width: 20%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">$37,578 <span>Avg</span></p>
+                    </div>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Expected profit</p>
+                        <h4 class="fs-16 mb-2">$23,461</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-info" style="width: 60%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">$23,461 <span>Avg</span></p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h3 class="card-title">Latest log</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-primary"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">12 new users registered</p>
+                                    <span class="text-muted">Just now</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-success"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">System shutdown <span class="badge badge-label-success">pending</span></p>
+                                    <span class="text-muted">2 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-primary"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">New invoice received</p>
+                                    <span class="text-muted">3 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-danger"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">New order received <span class="badge badge-label-danger">urgent</span></p>
+                                    <span class="text-muted">10 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-warning"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">Production server down</p>
+                                    <span class="text-muted">1 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-info"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">System error <a href="#">check</a></p>
+                                    <span class="text-muted">2 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-secondary"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">DB overloaded 80%</p>
+                                    <span class="text-muted">5 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-success"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">Production server up</p>
+                                    <span class="text-muted">6 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h3 class="card-title">Upcoming activities</h3>
+                    <div class="timeline timeline-timed">
+                        <div class="timeline-item">
+                            <span class="timeline-time">10:00</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-primary"></i></div>
+                            <div class="timeline-content">
+                                <div>
+                                    <span>Meeting with</span>
+                                    <div class="avatar-group ms-2">
+                                        <div class="avatar avatar-circle">
+                                            <img src="assets/images/users/avatar-1.png" alt="Avatar image" class="avatar-2xs" />
+                                        </div>
+                                        <div class="avatar avatar-circle">
+                                            <img src="assets/images/users/avatar-2.png" alt="Avatar image" class="avatar-2xs" />
+                                        </div>
+                                        <div class="avatar avatar-circle">
+                                            <img src="assets/images/users/avatar-3.png" alt="Avatar image" class="avatar-2xs" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">12:45</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-warning"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Lorem ipsum dolor sit amit,consectetur eiusmdd tempor incididunt ut labore et dolore magna elit enim at minim veniam quis nostrud</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">14:00</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-danger"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Received a new feedback on <a href="#">GoFinance</a> App product.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">15:20</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-success"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Lorem ipsum dolor sit amit,consectetur eiusmdd tempor incididunt ut labore et dolore magna.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">17:00</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-info"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Make Deposit <a href="#">USD 700</a> o ESL.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end card-->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
+
+    <!-- Required datatable js -->
+    <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- Responsive examples -->
+    <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <!--tinymce js-->
+    <script src="assets/libs/tinymce/tinymce.min.js"></script>
+    <script>
+        if ($("#elm1").length > 0) {
+            tinymce.init({
+                selector: 'textarea',  // change this value according to your HTML
+                menu: {
+                    file: { title: 'Arquivo', items: 'newdocument restoredraft | preview | importword exportpdf exportword | print | deleteallconversations' },
+                    edit: { title: 'Editar', items: 'undo redo | cut copy paste pastetext | selectall | searchreplace' },
+                    view: { title: 'Visualizar', items: 'code revisionhistory | visualaid visualchars visualblocks | spellchecker | preview fullscreen | showcomments' },
+                    insert: { title: 'Inserir', items: 'image link media addcomment pageembed codesample inserttable | math | charmap emoticons hr | pagebreak nonbreaking anchor tableofcontents | insertdatetime' },
+                    format: { title: 'Formatar', items: 'bold italic underline strikethrough superscript subscript codeformat | styles blocks fontfamily fontsize align lineheight | forecolor backcolor | language | removeformat' },
+                    tools: { title: 'Ferramentas', items: 'spellchecker spellcheckerlanguage | a11ycheck code wordcount' },
+                    table: { title: 'Tabela', items: 'inserttable | cell row column | advtablesort | tableprops deletetable' },
+                    help: { title: 'Ajuda', items: 'help' }
+                  },
+                branding: false,
+                });
+        }
+
+        $(document).ready(function(){$("#datatable").DataTable({language:{paginate:{previous:"<i class='mdi mdi-chevron-left'>",next:"<i class='mdi mdi-chevron-right'>"}},drawCallback:function(){$(".dataTables_paginate > .pagination").addClass("pagination")}}),$("#scroll-sidebar-datatable").DataTable({scrollY:"350px",scrollCollapse:!0,paging:!0,language:{paginate:{previous:"<i class='mdi mdi-chevron-left'>",next:"<i class='mdi mdi-chevron-right'>"}},drawCallback:function(){$(".dataTables_paginate > .pagination").addClass("pagination")}}),$("#alternative-page-datatable").DataTable({
+        "order": [
+            [0, "asc"]
+        ],
+        "buttons": ["excel", "pdf"],
+        "language": {
+            "zeroRecords": "Nada encontrado- refaça sua busca",
+            "info": "10/1000",
+            "infoFiltered": "(filtrado MAX dos registros totais)",
+            "sSearch": "Procurar:",
+            "searchPlaceholder": "Digite sua busca",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Próximo",
+            }
+        },
+        pagingType:"simple_numbers",drawCallback:function(){$(".dataTables_paginate > .pagination").addClass("pagination"),$(".dataTables_length select").addClass("form-select form-select-sm")}}),$("#datatable-1").DataTable({responsive:!0,lengthMenu:[[5,10,25,50,-1],[5,10,25,50,"All"]]}),$(".dataTables_length select").addClass("form-select form-select-sm")});
+
+    </script>
+    <!-- touchspin js -->
+    <script src="assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="assets/js/pages/form-touchspin.init.js"></script>
+
+    <script src="assets/js/function.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <!-- Bootstrap datepicker -->
+    <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="assets/js/pages/form-datepicker.init.js"></script>
+    </body>
+
+</html>

@@ -1,0 +1,84 @@
+<header id="page-topbar">
+    <div class="navbar-header">
+        <!-- Logo Section -->
+        <div x-data="{ isSmall: window.innerWidth < 768 }" 
+            x-init="window.addEventListener('resize', () => isSmall = window.innerWidth < 768);" 
+            class="navbar-logo-box">
+            
+            <a href="index.html" class="logo logo-dark">
+                <!-- Logo pequena (telas menores) -->
+                 <template x-if="isSmall === true">
+                    <span class="logo-sm-att" x-show="isSmall">
+                        <img src="assets/images/logo2.png" alt="Dark Small Logo" width="150">
+                    </span>
+                 </template>
+                <template x-if="isSmall === false">
+                    <span class="logo-lg" x-show="!isSmall">
+                        <img src="assets/images/logo2.png" alt="Dark Large Logo" width="150">
+                    </span>
+                </template>
+            </a>
+            <a href="index.html" class="logo logo-light">
+                <!-- Logo pequena (telas menores) -->
+                <span class="logo-sm" x-show="isSmall">
+                    <img src="assets/images/logo2.png" alt="Light Small Logo" width="100">
+                </span>
+                <!-- Logo grande (telas maiores) -->
+                <span class="logo-lg" x-show="!isSmall">
+                    <img src="assets/images/logo2.png" alt="Light Large Logo" width="150">
+                </span>
+            </a>
+
+            <button type="button" class="btn btn-sm top-icon sidebar-btn ms-4" id="sidebar-btn">
+                <i class="mdi mdi-menu-open align-middle fs-19"></i>
+            </button>
+        </div>
+
+        <!-- End Logo Section -->
+
+        <!-- Menu Section -->
+        <div class="d-flex justify-content-between menu-sm px-3 ms-auto"
+        x-data="{ open: false }">
+            <div class="d-flex align-items-center gap-2"></div>
+            <div class="d-flex align-items-center gap-2">
+                <!-- Profile Dropdown -->
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn btn-sm top-icon p-0" x-on:click="open = ! open">
+                        <img class="rounded avatar-2xs p-0" src="assets/images/users/avatar-6.png" alt="Header Avatar">
+                    </button>
+                    <div class=" dropdown-menu-wide dropdown-menu-end dropdown-menu-animated py-0" x-show="open">
+                        <div class="card border-0">
+                            <div class="card-header bg-primary rounded-0">
+                                <div class="rich-list-item w-100 p-0">
+                                    <div class="rich-list-prepend">
+                                        <div class="avatar avatar-label-light avatar-circle">
+                                            <div class="avatar-display">
+                                                <i class="fa fa-user-alt"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="rich-list-content">
+                                        <h3 class="rich-list-title text-white">Sua Conta</h3>
+                                        <span class="rich-list-subtitle text-white">email@email.com</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer card-footer-bordered rounded-0">
+                                <a href="{{ route('profile') }}" class="btn btn-label-primary m-2 mt-3">
+                                    <i class="far fa-address-card"></i>
+                                    <span>Perfil</span>
+                                </a>
+                                <a href="auth-login.html" class="btn btn-label-danger m-2 mt-3">
+                                    <i class="fas fa-sign-out-alt me-1"></i>
+                                    Sair
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Profile Dropdown -->
+            </div>
+        </div>
+        <!-- End Menu Section -->
+    </div>
+</header>

@@ -1,0 +1,944 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Lista de Clientes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Codebucks" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+
+    <!-- DataTables -->
+    <link href="assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- dark layout js -->
+    <script src="assets/js/pages/layout.js"></script>
+
+    <!-- Bootstrap Css -->
+    <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- simplebar css -->
+    <link href="assets/libs/simplebar/simplebar.min.css" rel="stylesheet">
+    <!-- App Css-->
+    <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        .showItem {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+
+        <!-- ========== Left Sidebar / Topbar Start ========== -->
+        <x-sidebar />
+        <!-- Left Sidebar / Topbar End -->
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Lista de Clientes</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- end page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="col-12 mb-5">
+                                        <button class="btn btn-outline-primary float-end" data-bs-toggle="modal" data-bs-target="#modalCadastrarCliente" onclick="newForm()">Cadastrar Novo Cliente</button>
+                                    </div>
+                                    <table id="alternative-page-datatable" class="table table-hover table-striped dt-responsive nowrap w-100">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome ou Razão Social</th>
+                                                <th>CPF ou CNPJ</th>
+                                                <th>Email</th>
+                                                <th>Telefone</th>
+                                                <th>Cidade</th>
+                                                <th>Estado</th>
+                                                <th>Tipo de Pessoa</th>
+                                                <th>Status</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($clientes as $cliente) { ?>
+                                                <tr>
+                                                    <td>{{$cliente->clientes_name}} {{$cliente->clientes_fantasy_name}}</td>
+                                                    <td>{{$cliente->clientes_cpf}} {{$cliente->clientes_cnpj}}</td>
+                                                    <td>{{$cliente->clientes_email}}</td>
+                                                    <td>{{$cliente->clientes_phone}}</td>
+                                                    <td>{{$cliente->clientes_city}}</td>
+                                                    <td>{{$cliente->clientes_state}}</td>
+                                                    <td>{{$cliente->clientes_type_client === 'cpf' ? 'Física' : 'Jurídica'}}</td>
+                                                    <td>{{$cliente->clientes_status === 1 ? 'Ativo' : 'Inativo'}}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" onclick='getUserData("{{$cliente->clientes_id}}", false)'></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" onclick='getUserData("{{$cliente->clientes_id}}", true)'></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" onclick='deleteUser("{{$cliente->clientes_id}}")'></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"></button>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                    </div>
+                    <!-- end row-->
+                    <div class="modal fade " id="modalCadastrarCliente">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content ">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Cadastro de Clientes</h4><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="nav nav-pills nav-justified widgets-nav mb-4" id="income-tab">
+                                            <a class="nav-item nav-link active" id="pessoa-fisica-tab" data-bs-toggle="tab" href="#pessoa-fisica">Pessoa Física</a>
+                                            <a class="nav-item nav-link" id="pessoa-juridica-tab" data-bs-toggle="tab" href="#pessoa-juridica">Pessoa Jurídica</a>
+                                        </div>
+                                        <div class="tab-content p-0" id="income-tabContent">
+                                            <div class="tab-pane fade show active" id="pessoa-fisica">
+                                                <div class="col-xl-12">
+                                                    <div class="card">
+                                                        <div class="card-body mt-3 mb-0 pb-0">
+                                                            <form class="row g-3" id="clientesForm" onsubmit="return false;" method="POST">
+                                                                <input type="hidden" name="id" id="id">
+                                                                <div class="col-md-6"><label for="nome" class="form-label">Nome</label> <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required></div>
+                                                                <div class="col-md-6"><label for="sobrenome" class="form-label">Sobrenome</label> <input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Sobrenome" required></div>
+                                                                <div class="col-md-6"><label for="cpf" class="form-label">CPF</label> <input type="text" class="form-control cpf" id="cpf" name="cpf" required></div>
+                                                                <div class="col-md-6"><label for="data_nascimento" class="form-label">Data de Nascimento</label> <input type="date" data-placement="bottom" class="form-control" id="data_nascimento" name="data_nascimento" required></div>
+                                                                <div class="col-md-6">
+                                                                    <label for="email">Email</label>
+                                                                    <div class="input-group mt-0">
+                                                                        <div class="input-group-text">
+                                                                            <i class="fa fa-envelope"></i>
+                                                                        </div>
+                                                                        <input type="email" class="form-control" id="email" name="email" placeholder="Insira seu Email" required />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6"><label for="telefone">Telefone</label> <input type="text" id="telefone" name="telefone" class="form-control phone" required placeholder="Somente números" /></div>
+                                                                <div class="col-md-2"><label for="cep" class="form-label">CEP</label> <input type="text" class="form-control cep" id="cep" name="cep" onblur="consultarCep(this.value);" required /></div>
+                                                                <div class="col-md-6"><label for="endereco" class="form-label">Endereço</label> <input type="text" class="form-control" id="endereco" name="endereco" required placeholder="Rua" /></div>
+                                                                <div class="col-md-2"><label for="numero" class="form-label">Número</label> <input type="text" class="form-control" id="numero" name="numero" required /></div>
+                                                                <div class="col-md-2"><label for="complemento" class="form-label">Complemento</label> <input type="text" class="form-control" id="complemento" name="complemento" /></div>
+                                                                <div class="col-md-4"><label for="bairro" class="form-label">Bairro</label> <input type="text" class="form-control" id="bairro" name="bairro" required /></div>
+                                                                <div class="col-md-4"><label for="cidade" class="form-label">Cidade</label> <input type="text" class="form-control" id="cidade" name="cidade" required /></div>
+                                                                <div class="dropup col-md-4">
+                                                                    <label for="estados" class="form-label">Estado</label>
+                                                                    <select id="estado" name="estado" class="form-select estado-select" required="required">
+                                                                        <option selected="selected">Selecione</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="modal-footer mt-5 pt-4 pb-1">
+                                                                    <button type="submit" class="btn btn-primary btn-widest btn-lg float-end register_item">Cadastrar</button>
+                                                                    <button type="submit" class="btn btn-primary btn-widest btn-lg float-end update_item">Atualizar</button>
+                                                                    <button data-bs-dismiss="modal" class="btn btn-outline-danger btn-widest btn-lg float-end">Cancelar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div> <!-- end col -->
+                                            </div>
+                                        </div>
+                                        <div class="tab-content p-0" id="income-tabContent">
+                                            <div class="tab-pane fade" id="pessoa-juridica">
+                                                <div class="col-xl-12">
+                                                    <div class="card">
+                                                        <div class="card-body mt-3 mb-0 pb-0">
+                                                            <form class="row g-3">
+                                                                <div class="col-md-6"><label for="razao_social" class="form-label">Razão Social</label> <input type="text" class="form-control" id="razao_social" required></div>
+                                                                <div class="col-md-6"><label for="nome_fantasia" class="form-label">Nome Fantasia</label> <input type="text" class="form-control" id="nome_fantasia" required></div>
+                                                                <div class="col-md-6"><label for="cnpj" class="form-label">CNPJ</label> <input type="text" class="form-control" id="cnpj" required></div>
+                                                                <div class="col-md-6"><label for="data_fundacao" class="form-label">Data de Fundação</label> <input type="text" class="form-control" data-placement="bottom" id="data_fundacao" required></div>
+                                                                <div class="col-md-6">
+                                                                    <label for="email">Email</label>
+                                                                    <div class="input-group mt-0">
+                                                                        <div class="input-group-text">
+                                                                            <i class="fa fa-envelope"></i>
+                                                                        </div>
+                                                                        <input type="email" class="form-control" name="email" placeholder="Insira seu Email" required />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6"><label for="telefone">Telefone</label> <input data-parsley-type="number" type="text" id="telefone" class="form-control" required placeholder="Somente números" /></div>
+                                                                <div class="col-md-2"><label for="cep" class="form-label">CEP</label> <input type="text" class="form-control" id="cep" required /></div>
+                                                                <div class="col-md-6"><label for="endereco" class="form-label">Endereço</label> <input type="text" class="form-control" id="endereco" placeholder="Rua" required /></div>
+                                                                <div class="col-md-2"><label for="numero" class="form-label">Número</label> <input type="text" class="form-control" id="numero" required /></div>
+                                                                <div class="col-md-2"><label for="complemento" class="form-label">Complemento</label> <input type="text" class="form-control" id="complemento" /></div>
+                                                                <div class="col-md-4"><label for="bairro" class="form-label">Bairro</label> <input type="text" class="form-control" required /></div>
+                                                                <div class="col-md-4"><label for="cidade" class="form-label">Cidade</label> <input type="text" class="form-control" required /></div>
+                                                                <div class="dropup col-md-4">
+                                                                    <label for="estados" class="form-label">Estado</label>
+                                                                    <select class="form-select estado-select" required="required">
+                                                                        <option selected="selected">Selecione</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="modal-footer mt-5 pt-4 pb-1">
+                                                                    <button type="submit" class="btn btn-primary btn-widest btn-lg float-end">Cadastrar</button>
+                                                                    <button data-bs-dismiss="modal" class="btn btn-outline-danger btn-widest btn-lg float-end">Cancelar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div> <!-- end col -->
+                                            </div>
+                                        </div>
+                                    </div><!-- end card body-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalEditCliente">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content" id="modalEditClienteFisica" style="display: none;">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Editar Cliente - Pessoa Física</h4><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="col-xl-12">
+                                            <div class="card">
+                                                <div class="card-body mt-3 mb-0 pb-0">
+                                                    <form class="row g-3">
+                                                        <div class="col-md-6"><label for="nome" class="form-label">Nome</label> <input type="text" class="form-control" id="nome" placeholder="Nome" required></div>
+                                                        <div class="col-md-6"><label for="sobrenome" class="form-label">Sobrenome</label> <input type="text" class="form-control" id="sobrenome" placeholder="Sobrenome" required></div>
+                                                        <div class="col-md-6"><label for="cpf" class="form-label">CPF</label> <input type="text" class="form-control" id="cpf" required></div>
+                                                        <div class="col-md-6"><label for="data_nascimento" class="form-label">Data de Nascimento</label> <input type="text" class="form-control" id="data_nascimento_fisica_ed" required></div>
+                                                        <div class="col-md-6">
+                                                            <label for="email">Email</label>
+                                                            <div class="input-group mt-0">
+                                                                <div class="input-group-text">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </div>
+                                                                <input type="email" class="form-control" name="email" placeholder="Insira seu Email" required />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6"><label for="telefone">Telefone</label> <input data-parsley-type="number" type="text" id="telefone" class="form-control" required placeholder="Somente números" /></div>
+                                                        <div class="col-md-2"><label for="cep" class="form-label">CEP</label> <input type="text" class="form-control" id="cep" required /></div>
+                                                        <div class="col-md-6"><label for="endereco" class="form-label">Endereço</label> <input type="text" class="form-control" id="endereco" required placeholder="Rua" /></div>
+                                                        <div class="col-md-2"><label for="numero" class="form-label">Número</label> <input type="text" class="form-control" id="numero" required /></div>
+                                                        <div class="col-md-2"><label for="complemento" class="form-label">Complemento</label> <input type="text" class="form-control" id="complemento" /></div>
+                                                        <div class="col-md-4"><label for="bairro" class="form-label">Bairro</label> <input type="text" class="form-control" required /></div>
+                                                        <div class="col-md-4"><label for="cidade" class="form-label">Cidade</label> <input type="text" class="form-control" required /></div>
+                                                        <div class="dropup col-md-4">
+                                                            <label for="estados" class="form-label">Estado</label>
+                                                            <select class="form-select estado-select" required="required">
+                                                                <option selected="selected">Selecione</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="modal-footer mt-5 pt-4 pb-1">
+                                                            <button type="submit" class="btn btn-primary btn-widest btn-lg float-end">Salvar</button>
+                                                            <button data-bs-dismiss="modal" class="btn btn-outline-danger btn-widest btn-lg float-end">Cancelar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-content" id="modalEditClienteJuridica">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Editar Cliente - Pessoa Jurídica</h4><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="col-xl-12">
+                                            <div class="card">
+                                                <div class="card-body mt-3 mb-0 pb-0">
+                                                    <form class="row g-3">
+                                                        <div class="col-md-6"><label for="razao_social" class="form-label">Razão Social</label> <input type="text" class="form-control" id="razao_social" required></div>
+                                                        <div class="col-md-6"><label for="nome_fantasia" class="form-label">Nome Fantasia</label> <input type="text" class="form-control" id="nome_fantasia" required></div>
+                                                        <div class="col-md-6"><label for="cnpj" class="form-label">CNPJ</label> <input type="text" class="form-control" id="cnpj" required></div>
+                                                        <div class="col-md-6"><label for="data_fundacao" class="form-label">Data de Fundação</label> <input type="text" class="form-control" id="data_fundacao_juridica_ed" required></div>
+                                                        <div class="col-md-6">
+                                                            <label for="email">Email</label>
+                                                            <div class="input-group mt-0">
+                                                                <div class="input-group-text">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </div>
+                                                                <input type="email" class="form-control" name="email" placeholder="Insira seu Email" required />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6"><label for="telefone">Telefone</label> <input data-parsley-type="number" type="text" id="telefone" class="form-control" required placeholder="Somente números" /></div>
+                                                        <div class="col-md-2"><label for="cep" class="form-label">CEP</label> <input type="text" class="form-control" id="cep" required /></div>
+                                                        <div class="col-md-6"><label for="endereco" class="form-label">Endereço</label> <input type="text" class="form-control" id="endereco" placeholder="Rua" required /></div>
+                                                        <div class="col-md-2"><label for="numero" class="form-label">Número</label> <input type="text" class="form-control" id="numero" required /></div>
+                                                        <div class="col-md-2"><label for="complemento" class="form-label">Complemento</label> <input type="text" class="form-control" id="complemento" /></div>
+                                                        <div class="col-md-4"><label for="bairro" class="form-label">Bairro</label> <input type="text" class="form-control" required /></div>
+                                                        <div class="col-md-4"><label for="cidade" class="form-label">Cidade</label> <input type="text" class="form-control" required /></div>
+                                                        <div class="dropup col-md-4">
+                                                            <label for="estados" class="form-label">Estado</label>
+                                                            <select class="form-select estado-select" required="required">
+                                                                <option selected="selected">Selecione</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="modal-footer mt-5 pt-4 pb-1">
+                                                            <button type="submit" class="btn btn-primary btn-widest btn-lg float-end">Salvar</button>
+                                                            <button data-bs-dismiss="modal" class="btn btn-outline-danger btn-widest btn-lg float-end">Cancelar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div><!-- end card body-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalMostrarCliente">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content" id="modalMostrarClienteFisica" style="display: none;">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Nome do Cliente - Pessoa Física</h4><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="col-xl-12">
+                                            <div class="card">
+                                                <div class="card-body mt-3 mb-0 pb-0">
+                                                    <form class="row g-3">
+                                                        <div class="col-md-6"><label for="nome" class="form-label">Nome</label> <input type="text" class="form-control" id="nome" placeholder="Nome" readonly></div>
+                                                        <div class="col-md-6"><label for="sobrenome" class="form-label">Sobrenome</label> <input type="text" class="form-control" id="sobrenome" placeholder="Sobrenome" readonly></div>
+                                                        <div class="col-md-6"><label for="cpf" class="form-label">CPF</label> <input type="text" class="form-control" id="cpf" readonly></div>
+                                                        <div class="col-md-6"><label for="data_nascimento" class="form-label">Data de Nascimento</label> <input type="text" class="form-control" id="datepicker-1" readonly></div>
+                                                        <div class="col-md-6">
+                                                            <label for="email">Email</label>
+                                                            <div class="input-group mt-0">
+                                                                <div class="input-group-text">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </div>
+                                                                <input type="email" class="form-control" name="email" placeholder="Insira seu Email" readonly />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6"><label for="telefone">Telefone</label> <input data-parsley-type="number" type="text" id="telefone" class="form-control" readonly placeholder="Somente números" /></div>
+                                                        <div class="col-md-2"><label for="cep" class="form-label">CEP</label> <input type="text" class="form-control" id="cep" readonly /></div>
+                                                        <div class="col-md-6"><label for="endereco" class="form-label">Endereço</label> <input type="text" class="form-control" id="endereco" readonly placeholder="Rua" /></div>
+                                                        <div class="col-md-2"><label for="numero" class="form-label">Número</label> <input type="text" class="form-control" id="numero" readonly /></div>
+                                                        <div class="col-md-2"><label for="complemento" class="form-label">Complemento</label> <input type="text" class="form-control" id="complemento" readonly /></div>
+                                                        <div class="col-md-4"><label for="bairro" class="form-label">Bairro</label> <input type="text" class="form-control" readonly /></div>
+                                                        <div class="col-md-4"><label for="cidade" class="form-label">Cidade</label> <input type="text" class="form-control" readonly /></div>
+                                                        <div class="dropup col-md-4">
+                                                            <label for="estados" class="form-label">Estado</label>
+                                                            <select class="form-select estado-select" required="readonly">
+                                                                <option selected="selected">Selecione</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="modal-footer mt-5 pt-4 pb-1">
+                                                            <button data-bs-dismiss="modal" class="btn btn-outline-danger btn-widest btn-lg float-end">Cancelar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-content" id="modalMostrarClienteJuridica">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Nome do Cliente - Pessoa Jurídica</h4><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="col-xl-12">
+                                            <div class="card">
+                                                <div class="card-body mt-3 mb-0 pb-0">
+                                                    <form class="row g-3">
+                                                        <div class="col-md-6"><label for="razao_social" class="form-label">Razão Social</label> <input type="text" class="form-control" id="razao_social" readonly></div>
+                                                        <div class="col-md-6"><label for="nome_fantasia" class="form-label">Nome Fantasia</label> <input type="text" class="form-control" id="nome_fantasia" readonly></div>
+                                                        <div class="col-md-6"><label for="cnpj" class="form-label">CNPJ</label> <input type="text" class="form-control" id="cnpj" readonly></div>
+                                                        <div class="col-md-6"><label for="data_fundacao" class="form-label">Data de Fundação</label> <input type="text" class="form-control" id="datepicker-1" readonly></div>
+                                                        <div class="col-md-6">
+                                                            <label for="email">Email</label>
+                                                            <div class="input-group mt-0">
+                                                                <div class="input-group-text">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </div>
+                                                                <input type="email" class="form-control" name="email" placeholder="Insira seu Email" readonly />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6"><label for="telefone">Telefone</label> <input data-parsley-type="number" type="text" id="telefone" class="form-control" readonly placeholder="Somente números" /></div>
+                                                        <div class="col-md-2"><label for="cep" class="form-label">CEP</label> <input type="text" class="form-control" id="cep" readonly /></div>
+                                                        <div class="col-md-6"><label for="endereco" class="form-label">Endereço</label> <input type="text" class="form-control" id="endereco" placeholder="Rua" readonly /></div>
+                                                        <div class="col-md-2"><label for="numero" class="form-label">Número</label> <input type="text" class="form-control" id="numero" readonly /></div>
+                                                        <div class="col-md-2"><label for="complemento" class="form-label">Complemento</label> <input type="text" class="form-control" id="complemento" readonly /></div>
+                                                        <div class="col-md-4"><label for="bairro" class="form-label">Bairro</label> <input type="text" class="form-control" readonly /></div>
+                                                        <div class="col-md-4"><label for="cidade" class="form-label">Cidade</label> <input type="text" class="form-control" readonly /></div>
+                                                        <div class="dropup col-md-4">
+                                                            <label for="estados" class="form-label">Estado</label>
+                                                            <select class="form-select estado-select" required="required">
+                                                                <option selected="selected">Selecione</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="modal-footer mt-5 pt-4 pb-1">
+                                                            <button data-bs-dismiss="modal" class="btn btn-outline-danger btn-widest btn-lg float-end">Cancelar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div><!-- end card body-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalExcluirCliente">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Tem certeza que deseja excluir esse cliente?</h3><button type="button" class="btn btn-sm btn-label-danger  btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-footer"><button class="btn btn-primary btn-widest btn-lg float-end">Sim</button> <button class="btn btn-outline-danger btn-widest btn-lg float-end" data-bs-dismiss="modal">Cancelar</button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalBloquearCliente">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Tem certeza que deseja bloquear esse cliente?</h3><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-footer"><button class="btn btn-primary btn-widest btn-lg float-end">Sim</button> <button class="btn btn-outline-danger btn-widest btn-lg float-end" data-bs-dismiss="modal">Cancelar</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script> © N Soluções Tecnologia.
+                        </div>
+                        <div class="col-sm-6" style="display: none;">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="http://codebucks.in/" target="_blank" class="text-muted">Codebucks</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- end main content-->
+    </div>
+    <!-- END layout-wrapper -->
+
+    <!-- Rightbar Sidebar -->
+    <div class="offcanvas offcanvas-end" id="offcanvas-rightsidabar">
+        <div class="card h-100 rounded-0" data-simplebar="init">
+            <div class="card-header bg-light">
+                <h6 class="card-title text-uppercase">Activities</h6>
+                <div class="card-addon">
+                    <button class="btn btn-label-danger" data-bs-dismiss="offcanvas">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="">
+                    <h3 class="card-title">Company summary</h3>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Server Load</p>
+                        <h4 class="fs-16 mb-2">489</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-success" style="width: 49.4%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">49.4% <span>Avg</span></p>
+                    </div>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Members online</p>
+                        <h4 class="fs-16 mb-2">3,450</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-danger" style="width: 34.6%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">34.6% <span>Avg</span></p>
+                    </div>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Today's revenue</p>
+                        <h4 class="fs-16 mb-2">$18,390</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-warning" style="width: 20%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">$37,578 <span>Avg</span></p>
+                    </div>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Expected profit</p>
+                        <h4 class="fs-16 mb-2">$23,461</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-info" style="width: 60%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">$23,461 <span>Avg</span></p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h3 class="card-title">Latest log</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-primary"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">12 new users registered</p>
+                                    <span class="text-muted">Just now</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-success"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">System shutdown <span class="badge badge-label-success">pending</span></p>
+                                    <span class="text-muted">2 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-primary"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">New invoice received</p>
+                                    <span class="text-muted">3 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-danger"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">New order received <span class="badge badge-label-danger">urgent</span></p>
+                                    <span class="text-muted">10 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-warning"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">Production server down</p>
+                                    <span class="text-muted">1 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-info"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">System error <a href="#">check</a></p>
+                                    <span class="text-muted">2 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-secondary"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">DB overloaded 80%</p>
+                                    <span class="text-muted">5 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-success"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">Production server up</p>
+                                    <span class="text-muted">6 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h3 class="card-title">Upcoming activities</h3>
+                    <div class="timeline timeline-timed">
+                        <div class="timeline-item">
+                            <span class="timeline-time">10:00</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-primary"></i></div>
+                            <div class="timeline-content">
+                                <div>
+                                    <span>Meeting with</span>
+                                    <div class="avatar-group ms-2">
+                                        <div class="avatar avatar-circle">
+                                            <img src="assets/images/users/avatar-1.png" alt="Avatar image" class="avatar-2xs" />
+                                        </div>
+                                        <div class="avatar avatar-circle">
+                                            <img src="assets/images/users/avatar-2.png" alt="Avatar image" class="avatar-2xs" />
+                                        </div>
+                                        <div class="avatar avatar-circle">
+                                            <img src="assets/images/users/avatar-3.png" alt="Avatar image" class="avatar-2xs" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">12:45</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-warning"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Lorem ipsum dolor sit amit,consectetur eiusmdd tempor incididunt ut labore et dolore magna elit enim at minim veniam quis nostrud</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">14:00</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-danger"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Received a new feedback on <a href="#">GoFinance</a> App product.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">15:20</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-success"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Lorem ipsum dolor sit amit,consectetur eiusmdd tempor incididunt ut labore et dolore magna.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">17:00</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-info"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Make Deposit <a href="#">USD 700</a> o ESL.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end card-->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
+
+    <!-- Required datatable js -->
+    <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- Responsive examples -->
+    <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" integrity="sha512-0XDfGxFliYJPFrideYOoxdgNIvrwGTLnmK20xZbCAvPfLGQMzHUsaqZK8ZoH+luXGRxTrS46+Aq400nCnAT0/w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Datatable init js -->
+    <!--  <script src="assets/js/pages/datatables-base.init.js"></script>-->
+    <script>
+        $(document).ready(function() {
+            $("#datatable").DataTable({
+                    language: {
+                        paginate: {
+                            previous: "<i class='mdi mdi-chevron-left'>",
+                            next: "<i class='mdi mdi-chevron-right'>"
+                        }
+                    },
+                    drawCallback: function() {
+                        $(".dataTables_paginate > .pagination").addClass("pagination")
+                    }
+                }),
+
+                $("#scroll-sidebar-datatable").DataTable({
+                    scrollY: "350px",
+                    scrollCollapse: !0,
+                    paging: !0,
+                    language: {
+                        paginate: {
+                            previous: "<i class='mdi mdi-chevron-left'>",
+                            next: "<i class='mdi mdi-chevron-right'>"
+                        }
+                    },
+                    drawCallback: function() {
+                        $(".dataTables_paginate > .pagination").addClass("pagination")
+                    }
+                }),
+
+                $("#alternative-page-datatable").DataTable({
+                    "order": [
+                        [0, "asc"]
+                    ],
+                    "buttons": ["excel", "pdf"],
+                    "language": {
+                        "zeroRecords": "Nada encontrado- refaça sua busca",
+                        "info": "10/1000",
+                        "infoFiltered": "(filtrado MAX dos registros totais)",
+                        "sSearch": "Procurar:",
+                        "searchPlaceholder": "Digite sua busca",
+                        "paginate": {
+                            "previous": "Anterior",
+                            "next": "Próximo",
+                        }
+                    },
+                    pagingType: "simple_numbers",
+                    drawCallback: function() {
+                        $(".dataTables_paginate > .pagination").addClass("pagination"), $(".dataTables_length select").addClass("form-select form-select-sm")
+                    },
+
+                }),
+
+                $("#datatable-1").DataTable({
+                    responsive: !0,
+                    lengthMenu: [
+                        [5, 10, 25, 50, -1],
+                        [5, 10, 25, 50, "All"]
+                    ]
+                }), $(".dataTables_length select").addClass("form-select form-select-sm")
+        });
+    </script>
+    <script src="assets/js/function.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <!-- Bootstrap datepicker -->
+    <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="assets/js/pages/form-datepicker.init.js"></script>
+
+    <!-- Modal forms -->
+    <script>
+        $(document).ready(function() {
+            $(".cep").mask("99999-999");
+            $(".cpf").mask("999.999.999-99");
+            $(".phone").mask("(99) 99999-9999");
+            $(".cnpj").mask("99.999.999/9999-99");
+
+        })
+
+        function getUserData(id, update) {
+
+            if (!update) {
+                desabilitarFormulario();
+                $('.update_item').attr('style', 'display: none');
+                $('.register_item').attr('style', 'display: none');
+
+            } else {
+                $('#id').val(id);
+                habilitarFormulario();
+                $('.update_item').attr('style', 'display: block');
+                $('.register_item').attr('style', 'display: none');
+            }
+
+            $.ajax({
+                url: 'api/clients/' + id,
+                method: 'GET',
+                success: function(userData) {
+
+
+                    Object.entries(userData).forEach(([key, value]) => {
+                        $('#' + key).val(value);
+                    });
+
+                    $("#modalCadastrarCliente").modal("show");
+                }
+            });
+        };
+
+
+        document.getElementById("clientesForm").onsubmit = function(e) {
+
+            e.preventDefault();
+
+            var id = $("#id").val();
+            var form = $('#clientesForm').serializeArray();
+
+            form = form.filter(i => i.name !== 'id');
+
+            const cpf = form.find(i => i.name === 'cpf').value;
+
+            if (!validarCPF(cpf)) {
+                alert("CPF inválido");
+                return;
+            }
+
+            form.push({
+                name: 'endereco',
+                value: $("#endereco").val()
+            });
+
+            form.push({
+                name: 'cidade',
+                value: $("#cidade").val()
+            });
+            form.push({
+                name: 'estado',
+                value: $("#estado").val()
+            });
+            form.push({
+                name: 'bairro',
+                value: $("#bairro").val()
+            });
+
+            if (id) {
+                $.ajax({
+                    url: 'api/clients/' + id,
+                    method: 'PUT',
+                    data: form,
+                    success: function(userData) {
+                        $("#modalCadastrarCliente").modal("hide");
+                        //$('#alternative-page-datatable').DataTable().ajax.reload()
+                        window.location.reload();
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            } else {
+
+                $.ajax({
+                    url: 'api/clients/',
+                    method: 'POST',
+                    data: form,
+                    success: function(userData) {
+                        $("#modalCadastrarCliente").modal("hide");
+                        //$('#alternative-page-datatable').DataTable().ajax.reload()
+                        window.location.reload();
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+        }
+
+        function confirmDelete(id) {
+            const confirmation = confirm("Tem certeza que deseja excluir este registro?");
+
+            if (confirmation) {
+                deleteUser(id);
+            }
+        }
+
+        function deleteUser(id) {
+
+            $.ajax({
+                url: 'api/clients/' + id,
+                method: 'DELETE',
+                success: function() {
+                    //$('#alternative-page-datatable').DataTable().reload()
+                    window.location.reload();
+                }
+            });
+        }
+
+        function newForm() {
+            $('#clientesForm')[0].reset();
+            $('.update_item').attr('style', 'display: none');
+            $('.register_item').attr('style', 'display: block');
+        }
+
+        //validar o cpf
+        function validarCPF(cpf) {
+            cpf = cpf.replace(/[^\d]+/g, '');
+
+            if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
+                return false;
+            }
+
+
+            function calcularDigito(base) {
+                let soma = 0;
+                for (let i = 0; i < base.length; i++) {
+                    soma += base[i] * ((base.length + 1) - i);
+                }
+                const resto = (soma * 10) % 11;
+                return resto === 10 || resto === 11 ? 0 : resto;
+            }
+
+            const baseCPF = cpf.slice(0, 9);
+            const primeiroDigito = calcularDigito(baseCPF);
+            const segundoDigito = calcularDigito(baseCPF + primeiroDigito);
+
+
+            return cpf === baseCPF + primeiroDigito + segundoDigito;
+        }
+
+        function consultarCep() {
+            const cep = $("#cep").val();
+            const url = `https://viacep.com.br/ws/${cep}/json/`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.logradouro) {
+                        document.getElementById("endereco").value = data.logradouro;
+                        document.getElementById("endereco").disabled = true
+                    }
+                    if (data.localidade) {
+                        document.getElementById("cidade").value = data.localidade;
+                        document.getElementById("cidade").disabled = true
+                    }
+                    if (data.uf) {
+                        document.getElementById("estado").value = data.uf;
+                        document.getElementById("estado").disabled = true
+                    }
+                    if (data.bairro) {
+                        document.getElementById("bairro").value = data.bairro;
+                        document.getElementById("bairro").disabled = true
+                    }
+
+                })
+                .catch(error => console.error(error));
+        }
+
+        function desabilitarFormulario() {
+            const form = document.getElementById('clientesForm');
+            const elementos = form.elements;
+
+            for (let i = 0; i < elementos.length; i++) {
+                if (elementos[i].type !== 'submit')
+                    elementos[i].disabled = true;
+            }
+        }
+
+        function habilitarFormulario() {
+            const form = document.getElementById('clientesForm');
+            const elementos = form.elements;
+
+            for (let i = 0; i < elementos.length; i++) {
+                if (elementos[i].type !== 'submit')
+                    elementos[i].disabled = false;
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>

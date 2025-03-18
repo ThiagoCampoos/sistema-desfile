@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>Lista de Clientes</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Codebucks" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        
+
+        <!-- DataTables -->
+        <link href="assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href="assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- dark layout js -->
+        <script src="assets/js/pages/layout.js"></script>
+
+        <!-- Bootstrap Css -->
+        <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- simplebar css -->
+        <link href="assets/libs/simplebar/simplebar.min.css" rel="stylesheet">
+        <!-- App Css-->
+        <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <link href="assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
+        <style>
+            .form-container {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                max-width: 1000px;
+                margin: 30px auto;
+                padding: 40px;
+                background-color: #ffffff;
+                border-radius: 12px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .titulo {
+                text-align: center;
+                color: #2c3e50;
+                margin-bottom: 30px;
+                font-size: 24px;
+                font-weight: 600;
+            }
+
+            .button-group-left {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+            }
+
+            .btn-back {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: 500;
+                cursor: pointer;
+                text-decoration: none;
+                color: white;
+                background-color: #2ecc71;
+                transition: background-color 0.3s ease;
+            }
+
+            .btn-back:hover {
+                background-color: #27ae60;
+            }
+
+            .form-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 15px;
+            }
+
+            .form-group.nome {
+                flex: 2 1 60%;
+            }
+
+            .form-group.status {
+                flex: 1 1 20%;
+            }
+
+            .form-group.cep {
+                flex: 1 1 20%;
+            }
+
+            .form-group.logradouro {
+                flex: 3 1 70%;
+            }
+
+            .form-group label {
+                margin-bottom: 5px;
+                font-weight: 500;
+                color: #34495e;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 12px;
+                border: 2px solid #e8e8e8;
+                border-radius: 8px;
+                font-size: 15px;
+                transition: all 0.3s ease;
+                background-color: #f8f9fa;
+            }
+
+            .form-group input:focus,
+            .form-group select:focus,
+            .form-group textarea:focus {
+                outline: none;
+                border-color: #2ecc71;
+                background-color: #ffffff;
+                box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+            }
+
+            .form-group input::placeholder,
+            .form-group textarea::placeholder {
+                color: #95a5a6;
+            }
+
+            .button-group {
+                display: flex;
+                gap: 20px;
+                justify-content: center;
+                margin-top: 30px;
+            }
+
+            .button-group button {
+                padding: 12px 35px;
+                border: none;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                color: white;
+            }
+
+            .button-group button[type="submit"] {
+                background-color: #2ecc71;
+                box-shadow: 0 2px 4px rgba(46, 204, 113, 0.2);
+            }
+
+            .button-group button[type="reset"] {
+                background-color: #e8e8e8;
+                color: #34495e;
+            }
+
+            .button-group button:hover {
+                transform: translateY(-2px);
+            }
+
+            .button-group button[type="submit"]:hover {
+                background-color: #27ae60;
+                box-shadow: 0 4px 8px rgba(46, 204, 113, 0.3);
+            }
+
+            .button-group button[type="reset"]:hover {
+                background-color: #dcdde1;
+            }
+        </style>
+
+    </head>
+
+    <body>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <!-- Start topbar -->
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <!-- Logo -->
+                <!-- Start Navbar-Brand -->
+                <div class="navbar-logo-box">
+                    <a href="index.html" class="logo logo-dark">
+                        <span class="logo-sm">
+                            <img src="assets/images/logo2.png" alt="logo-sm-dark" width="100">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="assets/images/logo2.png" alt="logo-dark"  width="100">
+                        </span>
+                    </a>
+    
+                    <a href="index.html" class="logo logo-light">
+                        <span class="logo-sm">
+                            <img src="assets/images/logo2.png" alt="logo-sm-light" width="100">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="assets/images/logo2.png" alt="logo-light" width="100">
+                        </span>
+                    </a>
+    
+                    <button type="button" class="btn btn-sm top-icon sidebar-btn" id="sidebar-btn">
+                        <i class="mdi mdi-menu-open align-middle fs-19"></i>
+                    </button>
+                </div>
+                <!-- End navbar brand -->
+                <!-- Start menu -->
+                <div class="d-flex justify-content-between menu-sm px-3 ms-auto">
+                    <div class="d-flex align-items-center gap-2">
+                        
+                        
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <!--Start App Search-->
+                        
+                        <!--End App Search-->
+                        <!-- Start Notification -->
+                        
+                        <!-- End Notification -->
+                        <!-- Start Activities -->
+                        
+                        <!-- End Activities -->
+                        <!-- Start Profile -->
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn btn-sm top-icon p-0" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="rounded avatar-2xs p-0" src="assets/images/users/avatar-6.png" alt="Header Avatar">
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-wide dropdown-menu-end dropdown-menu-animated overflow-hidden py-0">
+                                <div class="card border-0">
+                                    <div class="card-header bg-primary rounded-0">
+                                        <div class="rich-list-item w-100 p-0">
+                                            <div class="rich-list-prepend">
+                                                <div class="avatar avatar-label-light avatar-circle">
+                                                    <div class="avatar-display"><i class="fa fa-user-alt"></i></div>
+                                                </div>
+                                            </div>
+                                            <div class="rich-list-content">
+                                                <h3 class="rich-list-title text-white">Sua Conta</h3>
+                                                <span class="rich-list-subtitle text-white">email@email.com</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="card-footer card-footer-bordered rounded-0">
+                                            <a href="apps-contact.html" class="btn btn-label-primary m-2 mt-3">
+                                                <i class="far fa-address-card"></i>
+                                                <span >Perfil</span>
+                                            </a>
+                                            <a href="auth-login.html" class="btn btn-label-danger m-2 mt-3"><i class="fas fa-sign-out-alt me-1"></i>Sair</a>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Profile -->
+                    </div>
+                </div>
+                <!-- End menu -->
+            </div>
+        </header>
+        <!-- End topbar -->
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="sidebar-left">
+            <div data-simplebar class="h-100">
+                <!--- Sidebar-menu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="left-menu list-unstyled" id="side-menu">
+                        <li>
+                            <a href="index.html" class="">
+                                <i class="fas fa-desktop"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li><a href="listagem_clientes.html"><i class="fas fa-address-card"></i> <span>Lista de Clientes</span></a></li>
+                        <li><a href="listagem_usuarios.html"><i class="fas fa-users"></i> <span>Lista de Usuários</span></a></li>
+                        <li><a href="listagem_nf.html"><i class=" fas fa-folder-open"></i> <span>Notas Fiscais</span></a></li>
+                        <li><a href="revisional.html"><i class="fas fa-clipboard-list"></i> <span>Revisional</span></a></li>
+                        <li><a href="detalhes_cliente.html"><i class="fas fa-user"></i> <span>Detalhes do Cliente</span></a></li>
+                        <li><a href="analise_nf.html"><i class="fas fa-table"></i> <span>Análise de Nota Fiscal</span></a></li>
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Lista de Clientes</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <a href="cadastro.html" class="btn btn-outline-primary float-end">Cadastrar Novo Cliente</a>
+                                    <table id="clientTable">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nome</th>
+                                                <th>Email</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="clientTableBody">
+                                            <!-- Dados da tabela -->
+                                        </tbody>
+                                    <table id="alternative-page-datatable" class="table table-hover table-striped dt-responsive nowrap w-100">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nome</th>
+                                                    <th>CPF</th>
+                                                    <th>Email</th>
+                                                    <th>Telefone</th>
+                                                    <th>Status</th>
+                                                    <th>Ações</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Gloria Little</td>
+                                                    <td>123.456.789-10</td>
+                                                    <td>gloria.little@email.com</td>
+                                                    <td>(21) 98765-4321</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                    </div>
+                    <!-- end row-->
+                </div>
+                    <div class="modal fade" id="modalEditCliente">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content" id="modalEditClienteFisica" style="display: none;">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Editar Cliente - Pessoa Física</h4><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="col-xl-12" >
+                                            <div class="card">
+                                                <div class="card-body mt-3 mb-0 pb-0">
+                                                    <form class="form-container">
+                                                        <div class="titulo">Cadastro de Novo Cliente</div>
+
+                                                        <div class="button-group-left">
+                                                            <a href="listagem_clientes.html" class="btn-back">Voltar para Lista</a>
+                                                        </div>
+
+                                                        <div class="form-row">
+                                                            <div class="form-group" style="flex: 2 1 60%;">
+                                                                <label for="nome">Nome Completo:</label>
+                                                                <input type="text" id="nome" name="nome" placeholder="Nome">
+                                                            </div>
+
+                                                            <div class="form-group" style="flex: 1 1 20%;">
+                                                                <label for="ativo">Status:</label>
+                                                                <select id="ativo" name="ativo">
+                                                                    <option value="ativo">ATIVO</option>
+                                                                    <option value="inativo">INATIVO</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-row">
+                                                            <div class="form-group" style="flex: 1 1 20%;">
+                                                                <label for="cep">CEP:</label>
+                                                                <input type="text" id="cep" name="cep" placeholder="00000-000">
+                                                            </div>
+
+                                                            <div class="form-group" style="flex: 3 1 70%;">
+                                                                <label for="logradouro">Logradouro:</label>
+                                                                <input type="text" id="logradouro" name="logradouro" placeholder="Logradouro">
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Outros campos -->
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalMostrarCliente">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content" id="modalMostrarClienteFisica" style="display: none;">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Nome do Cliente - Pessoa Física</h4><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="col-xl-12" >
+                                            <div class="card">
+                                                <div class="card-body mt-3 mb-0 pb-0">
+                                                    <form class="row g-3">
+                                                        <div class="col-md-6"><label for="nome" class="form-label">Nome</label> <input type="text" class="form-control" id="nome" placeholder="Nome" readonly></div>
+                                                        <div class="col-md-6"><label for="sobrenome" class="form-label">Sobrenome</label> <input type="text" class="form-control" id="sobrenome" placeholder="Sobrenome" readonly></div>
+                                                        <div class="col-md-6"><label for="cpf" class="form-label">CPF</label> <input type="text" class="form-control" id="cpf" readonly></div>
+                                                        <div class="col-md-6"><label for="data_nascimento" class="form-label">Data de Nascimento</label> <input type="text" class="form-control" id="datepicker-1" readonly></div>
+                                                        <div class="col-md-6">
+                                                            <label for="email" >Email</label>
+                                                            <div class="input-group mt-0">
+                                                                <div class="input-group-text">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </div>
+                                                                <input type="email" class="form-control" name="email" placeholder="Insira seu Email"  readonly/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6"><label for="telefone">Telefone</label> <input data-parsley-type="number" type="text" id="telefone" class="form-control" readonly placeholder="Somente números" /></div>
+                                                        <div class="dropup col-md-4">
+                                                        </div>
+                                                        <div class="modal-footer mt-5 pt-4 pb-1">
+                                                            <button data-bs-dismiss="modal" class="btn btn-outline-danger btn-widest btn-lg float-end">Cancelar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalExcluirCliente">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Tem certeza que deseja excluir esse cliente?</h3><button type="button" class="btn btn-sm btn-label-danger  btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-footer"><button class="btn btn-primary btn-widest btn-lg float-end">Sim</button> <button class="btn btn-outline-danger btn-widest btn-lg float-end" data-bs-dismiss="modal">Cancelar</button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalBloquearCliente">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Tem certeza que deseja bloquear esse cliente?</h3><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-footer"><button class="btn btn-primary btn-widest btn-lg float-end">Sim</button> <button class="btn btn-outline-danger btn-widest btn-lg float-end" data-bs-dismiss="modal">Cancelar</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <script>document.write(new Date().getFullYear())</script> © N Soluções Tecnologia.
+                        </div>
+                        <div class="col-sm-6" style="display: none;">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="http://codebucks.in/" target="_blank" class="text-muted">Codebucks</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- end main content-->
+    </div>
+    <!-- END layout-wrapper -->    
+    
+    <!-- Rightbar Sidebar -->
+    <div class="offcanvas offcanvas-end" id="offcanvas-rightsidabar">
+        <div class="card h-100 rounded-0" data-simplebar="init">
+            <div class="card-header bg-light">
+                <h6 class="card-title text-uppercase">Activities</h6>
+                <div class="card-addon">
+                    <button class="btn btn-label-danger" data-bs-dismiss="offcanvas">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="">
+                    <h3 class="card-title">Company summary</h3>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Server Load</p>
+                        <h4 class="fs-16 mb-2">489</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-success" style="width: 49.4%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">49.4% <span>Avg</span></p>
+                    </div>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Members online</p>
+                        <h4 class="fs-16 mb-2">3,450</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-danger" style="width: 34.6%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">34.6% <span>Avg</span></p>
+                    </div>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Today's revenue</p>
+                        <h4 class="fs-16 mb-2">$18,390</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-warning" style="width: 20%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">$37,578 <span>Avg</span></p>
+                    </div>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Expected profit</p>
+                        <h4 class="fs-16 mb-2">$23,461</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-info" style="width: 60%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">$23,461 <span>Avg</span></p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h3 class="card-title">Latest log</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-primary"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">12 new users registered</p>
+                                    <span class="text-muted">Just now</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-success"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">System shutdown <span class="badge badge-label-success">pending</span></p>
+                                    <span class="text-muted">2 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-primary"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">New invoice received</p>
+                                    <span class="text-muted">3 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-danger"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">New order received <span class="badge badge-label-danger">urgent</span></p>
+                                    <span class="text-muted">10 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-warning"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">Production server down</p>
+                                    <span class="text-muted">1 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-info"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">System error <a href="#">check</a></p>
+                                    <span class="text-muted">2 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-secondary"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">DB overloaded 80%</p>
+                                    <span class="text-muted">5 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-success"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">Production server up</p>
+                                    <span class="text-muted">6 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h3 class="card-title">Upcoming activities</h3>
+                    <div class="timeline timeline-timed">
+                        <div class="timeline-item">
+                            <span class="timeline-time">10:00</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-primary"></i></div>
+                            <div class="timeline-content">
+                                <div>
+                                    <span>Meeting with</span>
+                                    <div class="avatar-group ms-2">
+                                        <div class="avatar avatar-circle">
+                                            <img src="assets/images/users/avatar-1.png" alt="Avatar image" class="avatar-2xs" />
+                                        </div>
+                                        <div class="avatar avatar-circle">
+                                            <img src="assets/images/users/avatar-2.png" alt="Avatar image" class="avatar-2xs" />
+                                        </div>
+                                        <div class="avatar avatar-circle">
+                                            <img src="assets/images/users/avatar-3.png" alt="Avatar image" class="avatar-2xs" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">12:45</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-warning"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Lorem ipsum dolor sit amit,consectetur eiusmdd tempor incididunt ut labore et dolore magna elit enim at minim veniam quis nostrud</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">14:00</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-danger"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Received a new feedback on <a href="#">GoFinance</a> App product.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">15:20</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-success"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Lorem ipsum dolor sit amit,consectetur eiusmdd tempor incididunt ut labore et dolore magna.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">17:00</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-info"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Make Deposit <a href="#">USD 700</a> o ESL.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end card-->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
+
+    <!-- Required datatable js -->
+    <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- Responsive examples -->
+    <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+
+    <!-- Datatable init js -->
+   <!--  <script src="assets/js/pages/datatables-base.init.js"></script>-->
+    <script>
+    $(document).ready(function(){$("#datatable").DataTable({language:{paginate:{previous:"<i class='mdi mdi-chevron-left'>",next:"<i class='mdi mdi-chevron-right'>"}},drawCallback:function(){$(".dataTables_paginate > .pagination").addClass("pagination")}}),$("#scroll-sidebar-datatable").DataTable({scrollY:"350px",scrollCollapse:!0,paging:!0,language:{paginate:{previous:"<i class='mdi mdi-chevron-left'>",next:"<i class='mdi mdi-chevron-right'>"}},drawCallback:function(){$(".dataTables_paginate > .pagination").addClass("pagination")}}),$("#alternative-page-datatable").DataTable({
+        "order": [
+            [0, "asc"]
+        ],
+        "buttons": ["excel", "pdf"],
+        "language": {
+            "zeroRecords": "Nada encontrado- refaça sua busca",
+            "info": "10/1000",
+            "infoFiltered": "(filtrado MAX dos registros totais)",
+            "sSearch": "Procurar:",
+            "searchPlaceholder": "Digite sua busca",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Próximo",
+            }
+        },
+        pagingType:"simple_numbers",drawCallback:function(){$(".dataTables_paginate > .pagination").addClass("pagination"),$(".dataTables_length select").addClass("form-select form-select-sm")}}),$("#datatable-1").DataTable({responsive:!0,lengthMenu:[[5,10,25,50,-1],[5,10,25,50,"All"]]}),$(".dataTables_length select").addClass("form-select form-select-sm")});
+
+    </script>
+    <script src="assets/js/function.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <!-- Bootstrap datepicker -->
+    <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="assets/js/pages/form-datepicker.init.js"></script>
+    <script>
+        function mostrarFormulario() {
+            document.getElementById("tabelaClientes").style.display = "none";
+            document.getElementById("formularioCadastro").style.display = "block";
+        }
+    
+        function mostrarTabela() {
+            document.getElementById("tabelaClientes").style.display = "block";
+            document.getElementById("formularioCadastro").style.display = "none";
+        }
+    </script>
+    
+    </body>
+</html>

@@ -1,0 +1,131 @@
+@if ($paginator->hasPages())
+    <nav class="d-flex justify-items-center justify-content-between">
+        <div class="d-flex justify-content-between flex-fill d-sm-none">
+            <ul class="pagination">
+                {{-- Previous Page Link --}}
+                @if ($paginator->onFirstPage())
+                    <li class="page-item disabled" aria-disabled="true">
+                        <span class="page-link">@lang('pagination.previous')</span>
+                    </li>
+                @else
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $paginator->previousPageUrl() }}"
+                           rel="prev">@lang('pagination.previous')</a>
+                    </li>
+                @endif
+
+                {{-- Next Page Link --}}
+                @if ($paginator->hasMorePages())
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $paginator->nextPageUrl() }}"
+                           rel="next">@lang('pagination.next')</a>
+                    </li>
+                @else
+                    <li class="page-item disabled" aria-disabled="true">
+                        <span class="page-link">@lang('pagination.next')</span>
+                    </li>
+                @endif
+            </ul>
+        </div>
+
+        <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-between">
+            <div>
+                <p class="small text-muted">
+                    {{ __('pagination.showing') }}
+                    <span class="fw-semibold">{{ $paginator->firstItem() }}</span>
+                    {!! __('pagination.to') !!}
+                    <span class="fw-semibold">{{ $paginator->lastItem() }}</span>
+                    {!! __('pagination.of') !!}
+                    <span class="fw-semibold">{{ $paginator->total() }}</span>
+                    {!! __('pagination.results') !!}
+                </p>
+            </div>
+
+            <div>
+                <ul class="pagination d-none d-sm-flex">
+                    {{-- Previous Page Link --}}
+                    @if ($paginator->onFirstPage())
+                        <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
+                            <span class="page-link" aria-hidden="true">&lsaquo;</span>
+                        </li>
+                    @else
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev"
+                               aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                        </li>
+                    @endif
+
+                    {{-- Custom Pagination Elements --}}
+                    @php
+                        $currentPage = $paginator->currentPage();
+                        $lastPage = $paginator->lastPage();
+
+                        if ($lastPage <= 5) {
+                            // Se existem 5 ou menos páginas, mostra todas elas
+                            $elements = range(1, $lastPage);
+                        } else {
+                            // Lógica para muitos resultados
+                            $elements = [];
+                            // Sempre mostra a primeira página
+                            $elements[] = [1];
+
+                            // Adiciona "..." se necessário
+                            if ($currentPage > 4) {
+                                $elements[] = ['...'];
+                            }
+
+                            // Páginas ao redor da página atual
+                            $start = max(2, $currentPage - 1);
+                            $end = min($lastPage - 3, $currentPage + 1);
+                            if ($start <= $end) {
+                                $elements[] = range($start, $end);
+                            }
+
+                            // Adiciona "..." novamente se necessário
+                            if ($currentPage < $lastPage - 3) {
+                                $elements[] = ['...'];
+                            }
+
+                            // Sempre mostra as últimas 3 páginas (se há mais de 3 páginas)
+                            if ($lastPage > 3) {
+                                $elements[] = range(max($lastPage - 2, 4), $lastPage);
+                            }
+
+                            // Flatten o array
+                            $elements = array_merge(...array_filter($elements, 'is_array'));
+                        }
+                    @endphp
+
+                    @foreach ($elements as $element)
+                        @if (is_string($element))
+                            {{-- Exibe os "..." --}}
+                            <li class="page-item disabled" aria-disabled="true"><span
+                                    class="page-link">{{ $element }}</span></li>
+                        @else
+                            {{-- Exibe os números das páginas --}}
+                            @if ($element == $paginator->currentPage())
+                                <li class="page-item active" aria-current="page"><span
+                                        class="page-link">{{ $element }}</span></li>
+                            @else
+                                <li class="page-item"><a class="page-link"
+                                                         href="{{ $paginator->url($element) }}">{{ $element }}</a></li>
+                            @endif
+                        @endif
+                    @endforeach
+
+                    {{-- Next Page Link --}}
+                    @if ($paginator->hasMorePages())
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next"
+                               aria-label="@lang('pagination.next')">&rsaquo;</a>
+                        </li>
+                    @else
+                        <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
+                            <span class="page-link" aria-hidden="true">&rsaquo;</span>
+                        </li>
+                    @endif
+                </ul>
+            </div>
+        </div>
+    </nav>
+@endif

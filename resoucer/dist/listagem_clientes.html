@@ -1,0 +1,1066 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>Lista de Clientes</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Codebucks" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        
+
+        <!-- DataTables -->
+        <link href="assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href="assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- dark layout js -->
+        <script src="assets/js/pages/layout.js"></script>
+
+        <!-- Bootstrap Css -->
+        <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- simplebar css -->
+        <link href="assets/libs/simplebar/simplebar.min.css" rel="stylesheet">
+        <!-- App Css-->
+        <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <link href="assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
+
+    </head>
+
+    <body>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <!-- Start topbar -->
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <!-- Logo -->
+                <!-- Start Navbar-Brand -->
+                <div class="navbar-logo-box">
+                    <a href="index.html" class="logo logo-dark">
+                        <span class="logo-sm">
+                            <img src="assets/images/logo2.png" alt="logo-sm-dark" width="100">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="assets/images/logo2.png" alt="logo-dark"  width="100">
+                        </span>
+                    </a>
+    
+                    <a href="index.html" class="logo logo-light">
+                        <span class="logo-sm">
+                            <img src="assets/images/logo2.png" alt="logo-sm-light" width="100">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="assets/images/logo2.png" alt="logo-light" width="100">
+                        </span>
+                    </a>
+    
+                    <button type="button" class="btn btn-sm top-icon sidebar-btn" id="sidebar-btn">
+                        <i class="mdi mdi-menu-open align-middle fs-19"></i>
+                    </button>
+                </div>
+                <!-- End navbar brand -->
+                <!-- Start menu -->
+                <div class="d-flex justify-content-between menu-sm px-3 ms-auto">
+                    <div class="d-flex align-items-center gap-2">
+                        
+                        
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <!--Start App Search-->
+                        
+                        <!--End App Search-->
+                        <!-- Start Notification -->
+                        
+                        <!-- End Notification -->
+                        <!-- Start Activities -->
+                        
+                        <!-- End Activities -->
+                        <!-- Start Profile -->
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn btn-sm top-icon p-0" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="rounded avatar-2xs p-0" src="assets/images/users/avatar-6.png" alt="Header Avatar">
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-wide dropdown-menu-end dropdown-menu-animated overflow-hidden py-0">
+                                <div class="card border-0">
+                                    <div class="card-header bg-primary rounded-0">
+                                        <div class="rich-list-item w-100 p-0">
+                                            <div class="rich-list-prepend">
+                                                <div class="avatar avatar-label-light avatar-circle">
+                                                    <div class="avatar-display"><i class="fa fa-user-alt"></i></div>
+                                                </div>
+                                            </div>
+                                            <div class="rich-list-content">
+                                                <h3 class="rich-list-title text-white">Sua Conta</h3>
+                                                <span class="rich-list-subtitle text-white">email@email.com</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="card-footer card-footer-bordered rounded-0">
+                                            <a href="apps-contact.html" class="btn btn-label-primary m-2 mt-3">
+                                                <i class="far fa-address-card"></i>
+                                                <span >Perfil</span>
+                                            </a>
+                                            <a href="auth-login.html" class="btn btn-label-danger m-2 mt-3"><i class="fas fa-sign-out-alt me-1"></i>Sair</a>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Profile -->
+                    </div>
+                </div>
+                <!-- End menu -->
+            </div>
+        </header>
+        <!-- End topbar -->
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="sidebar-left">
+            <div data-simplebar class="h-100">
+                <!--- Sidebar-menu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="left-menu list-unstyled" id="side-menu">
+                        <li>
+                            <a href="index.html" class="">
+                                <i class="fas fa-desktop"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li><a href="listagem_clientes.html"><i class="fas fa-address-card"></i> <span>Lista de Clientes</span></a></li>
+                        <li><a href="listagem_usuarios.html"><i class="fas fa-users"></i> <span>Lista de Usuários</span></a></li>
+                        <li><a href="listagem_nf.html"><i class=" fas fa-folder-open"></i> <span>Notas Fiscais</span></a></li>
+                        <li><a href="revisional.html"><i class="fas fa-clipboard-list"></i> <span>Revisional</span></a></li>
+                        <li><a href="detalhes_cliente.html"><i class="fas fa-user"></i> <span>Detalhes do Cliente</span></a></li>
+                        <li><a href="analise_nf.html"><i class="fas fa-table"></i> <span>Análise de Nota Fiscal</span></a></li>
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Lista de Clientes</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="col-12 mb-5">
+                                        <button class="btn btn-outline-primary float-end" data-bs-toggle="modal" data-bs-target="#modalCadastrarCliente">Cadastrar Novo Cliente</button>
+                                    </div>
+                                    <table id="alternative-page-datatable" class="table table-hover table-striped dt-responsive nowrap w-100">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nome ou Razão Social</th>
+                                                    <th>CPF ou CNPJ</th>
+                                                    <th>Email</th>
+                                                    <th>Telefone</th>
+                                                    <th>Cidade</th>
+                                                    <th>Estado</th>
+                                                    <th>Tipo de Pessoa</th>
+                                                    <th>Status</th>
+                                                    <th>Ações</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Gloria Little</td>
+                                                    <td>123.456.789-10</td>
+                                                    <td>gloria.little@email.com</td>
+                                                    <td>(21) 98765-4321</td>
+                                                    <td>New York</td>
+                                                    <td>NY</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bradley Greer</td>
+                                                    <td>987.654.321-00</td>
+                                                    <td>bradley.greer@email.com</td>
+                                                    <td>(11) 99876-5432</td>
+                                                    <td>London</td>
+                                                    <td>LND</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dai Rios</td>
+                                                    <td>456.789.123-22</td>
+                                                    <td>dai.rios@email.com</td>
+                                                    <td>(15) 91234-5678</td>
+                                                    <td>Edinburgh</td>
+                                                    <td>EDI</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jenette Caldwell</td>
+                                                    <td>321.654.987-11</td>
+                                                    <td>jenette.caldwell@email.com</td>
+                                                    <td>(13) 97654-3210</td>
+                                                    <td>New York</td>
+                                                    <td>NY</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Yuri Berry</td>
+                                                    <td>654.321.987-44</td>
+                                                    <td>yuri.berry@email.com</td>
+                                                    <td>(12) 96543-2109</td>
+                                                    <td>New York</td>
+                                                    <td>NY</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Caesar Vance</td>
+                                                    <td>678.910.111-33</td>
+                                                    <td>caesar.vance@email.com</td>
+                                                    <td>(14) 93210-9876</td>
+                                                    <td>New York</td>
+                                                    <td>NY</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Doris Wilder</td>
+                                                    <td>234.567.890-12</td>
+                                                    <td>doris.wilder@email.com</td>
+                                                    <td>(19) 99870-5643</td>
+                                                    <td>Sidney</td>
+                                                    <td>SYD</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Angelica Ramos</td>
+                                                    <td>12.345.678/0001-99</td>
+                                                    <td>angelica.ramos@empresa.com</td>
+                                                    <td>(11) 98760-1234</td>
+                                                    <td>London</td>
+                                                    <td>LND</td>
+                                                    <td>Jurídica</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gavin Joyce</td>
+                                                    <td>789.012.345-67</td>
+                                                    <td>gavin.joyce@email.com</td>
+                                                    <td>(16) 92134-7890</td>
+                                                    <td>Edinburgh</td>
+                                                    <td>EDI</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jennifer Chang</td>
+                                                    <td>543.210.987-65</td>
+                                                    <td>jennifer.chang@email.com</td>
+                                                    <td>(21) 91345-9876</td>
+                                                    <td>Singapore</td>
+                                                    <td>SGP</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Brenden Wagner</td>
+                                                    <td>678.543.210-99</td>
+                                                    <td>brenden.wagner@email.com</td>
+                                                    <td>(22) 98734-1234</td>
+                                                    <td>San Francisco</td>
+                                                    <td>SF</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Fiona Green</td>
+                                                    <td>11.234.567/0001-11</td>
+                                                    <td>fiona.green@empresa.com</td>
+                                                    <td>(21) 99876-3456</td>
+                                                    <td>San Francisco</td>
+                                                    <td>SF</td>
+                                                    <td>Jurídica</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Shou Itou</td>
+                                                    <td>123.789.456-22</td>
+                                                    <td>shou.itou@email.com</td>
+                                                    <td>(11) 91234-5678</td>
+                                                    <td>Tokyo</td>
+                                                    <td>TKY</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Michelle House</td>
+                                                    <td>987.456.123-33</td>
+                                                    <td>michelle.house@email.com</td>
+                                                    <td>(19) 93210-9876</td>
+                                                    <td>Sidney</td>
+                                                    <td>SYD</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Suki Burks</td>
+                                                    <td>111.222.333-44</td>
+                                                    <td>suki.burks@email.com</td>
+                                                    <td>(18) 99876-5432</td>
+                                                    <td>London</td>
+                                                    <td>LND</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Prescott Bartlett</td>
+                                                    <td>222.333.444-55</td>
+                                                    <td>prescott.bartlett@email.com</td>
+                                                    <td>(15) 97654-4321</td>
+                                                    <td>New York</td>
+                                                    <td>NY</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cedric Kelly</td>
+                                                    <td>456.789.012-33</td>
+                                                    <td>cedric.kelly@email.com</td>
+                                                    <td>(12) 97654-1234</td>
+                                                    <td>Tokyo</td>
+                                                    <td>TKY</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Zorita Serrano</td>
+                                                    <td>333.444.555-66</td>
+                                                    <td>zorita.serrano@email.com</td>
+                                                    <td>(14) 98765-6789</td>
+                                                    <td>San Francisco</td>
+                                                    <td>SF</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jack Dawson</td>
+                                                    <td>654.321.789-88</td>
+                                                    <td>jack.dawson@email.com</td>
+                                                    <td>(19) 91234-6789</td>
+                                                    <td>London</td>
+                                                    <td>LND</td>
+                                                    <td>Física</td>
+                                                    <td>Ativo</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-label-primary fas fa-eye" data-bs-toggle="modal" data-bs-target="#modalMostrarCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-edit" data-bs-toggle="modal" data-bs-target="#modalEditCliente" ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#modalExcluirCliente"  ></button>
+                                                        <button type="button" class="btn btn-label-primary fas fa-user-alt-slash" data-bs-toggle="modal" data-bs-target="#modalBloquearCliente"  ></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                    </div>
+                    <!-- end row-->
+                    <div class="modal fade " id="modalCadastrarCliente">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content ">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Cadastro de Clientes</h4><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="nav nav-pills nav-justified widgets-nav mb-4" id="income-tab">
+                                            <a class="nav-item nav-link active" id="pessoa-fisica-tab" data-bs-toggle="tab" href="#pessoa-fisica">Pessoa Física</a>
+                                            <a class="nav-item nav-link" id="pessoa-juridica-tab" data-bs-toggle="tab" href="#pessoa-juridica">Pessoa Jurídica</a>
+                                        </div>
+                                        <div class="tab-content p-0" id="income-tabContent">
+                                            <div class="tab-pane fade show active" id="pessoa-fisica">
+                                                <div class="col-xl-12" >
+                                                    <div class="card">
+                                                        <div class="card-body mt-3 mb-0 pb-0">
+                                                            <form class="row g-3">
+                                                                <div class="col-md-6"><label for="nome" class="form-label">Nome</label> <input type="text" class="form-control" id="nome" placeholder="Nome" required></div>
+                                                                <div class="col-md-6"><label for="sobrenome" class="form-label">Sobrenome</label> <input type="text" class="form-control" id="sobrenome" placeholder="Sobrenome" required></div>
+                                                                <div class="col-md-6"><label for="cpf" class="form-label">CPF</label> <input type="text" class="form-control" id="cpf" required></div>
+                                                                <div class="col-md-6"><label for="data_nascimento" class="form-label">Data de Nascimento</label> <input type="text" data-placement="bottom" class="form-control" id="data_nascimento_fisica" required></div>
+                                                                <div class="col-md-6">
+                                                                    <label for="email" >Email</label>
+                                                                    <div class="input-group mt-0">
+                                                                        <div class="input-group-text">
+                                                                            <i class="fa fa-envelope"></i>
+                                                                        </div>
+                                                                        <input type="email" class="form-control" name="email" placeholder="Insira seu Email"  required/>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6"><label for="telefone">Telefone</label> <input data-parsley-type="number" type="text" id="telefone" class="form-control" required placeholder="Somente números" /></div>
+                                                                <div class="col-md-2"><label for="cep" class="form-label">CEP</label> <input type="text" class="form-control" id="cep" required/></div>
+                                                                <div class="col-md-6"><label for="endereco" class="form-label">Endereço</label> <input type="text" class="form-control" id="endereco" required placeholder="Rua" /></div>
+                                                                <div class="col-md-2"><label for="numero" class="form-label">Número</label> <input type="text" class="form-control" id="numero" required /></div>
+                                                                <div class="col-md-2"><label for="complemento" class="form-label">Complemento</label> <input type="text" class="form-control" id="complemento" /></div>
+                                                                <div class="col-md-4"><label for="bairro" class="form-label">Bairro</label> <input type="text" class="form-control" id="bairro" required /></div>
+                                                                <div class="col-md-4"><label for="cidade" class="form-label">Cidade</label> <input type="text" class="form-control" id="cidade" required/></div>
+                                                                <div class="dropup col-md-4">
+                                                                    <label for="estados" class="form-label">Estado</label>
+                                                                    <select id="estados" name="estados" class="form-select estado-select" required="required">
+                                                                        <option selected="selected">Selecione</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="modal-footer mt-5 pt-4 pb-1">
+                                                                    <button type="submit" class="btn btn-primary btn-widest btn-lg float-end">Cadastrar</button>
+                                                                    <button data-bs-dismiss="modal" class="btn btn-outline-danger btn-widest btn-lg float-end">Cancelar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div> <!-- end col -->
+                                            </div>
+                                        </div>
+                                        <div class="tab-content p-0" id="income-tabContent">
+                                            <div class="tab-pane fade" id="pessoa-juridica">
+                                                <div class="col-xl-12" >
+                                                <div class="card">
+                                                    <div class="card-body mt-3 mb-0 pb-0">
+                                                        <form class="row g-3">
+                                                            <div class="col-md-6"><label for="razao_social" class="form-label">Razão Social</label> <input type="text" class="form-control" id="razao_social" required></div>
+                                                            <div class="col-md-6"><label for="nome_fantasia" class="form-label">Nome Fantasia</label> <input type="text" class="form-control" id="nome_fantasia" required></div>
+                                                            <div class="col-md-6"><label for="cnpj" class="form-label">CNPJ</label> <input type="text" class="form-control" id="cnpj" required></div>
+                                                            <div class="col-md-6"><label for="data_fundacao" class="form-label">Data de Fundação</label> <input type="text" class="form-control" data-placement="bottom" id="data_fundacao_juridica" required></div>
+                                                            <div class="col-md-6">
+                                                                <label for="email" >Email</label>
+                                                                <div class="input-group mt-0">
+                                                                    <div class="input-group-text">
+                                                                        <i class="fa fa-envelope"></i>
+                                                                    </div>
+                                                                    <input type="email" class="form-control" name="email" placeholder="Insira seu Email"  required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6"><label for="telefone">Telefone</label> <input data-parsley-type="number" type="text" id="telefone" class="form-control" required placeholder="Somente números" /></div>
+                                                            <div class="col-md-2"><label for="cep" class="form-label">CEP</label> <input type="text" class="form-control" id="cep" required /></div>
+                                                            <div class="col-md-6"><label for="endereco" class="form-label">Endereço</label> <input type="text" class="form-control" id="endereco" placeholder="Rua" required/></div>
+                                                            <div class="col-md-2"><label for="numero" class="form-label">Número</label> <input type="text" class="form-control" id="numero"  required/></div>
+                                                            <div class="col-md-2"><label for="complemento" class="form-label">Complemento</label> <input type="text" class="form-control" id="complemento" /></div>
+                                                            <div class="col-md-4"><label for="bairro" class="form-label">Bairro</label> <input type="text" class="form-control" id="bairro" required/></div>
+                                                            <div class="col-md-4"><label for="cidade" class="form-label">Cidade</label> <input type="text" class="form-control" id="cidade" required/></div>
+                                                            <div class="dropup col-md-4">
+                                                                <label for="estados" class="form-label">Estado</label>
+                                                                <select id="estados" name="estados" class="form-select estado-select" required="required">
+                                                                    <option selected="selected">Selecione</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="modal-footer mt-5 pt-4 pb-1">
+                                                                <button type="submit" class="btn btn-primary btn-widest btn-lg float-end">Cadastrar</button>
+                                                                <button data-bs-dismiss="modal" class="btn btn-outline-danger btn-widest btn-lg float-end">Cancelar</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- end col -->
+                                            </div>
+                                        </div>
+                                    </div><!-- end card body-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalEditCliente">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content" id="modalEditClienteFisica" style="display: none;">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Editar Cliente - Pessoa Física</h4><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="col-xl-12" >
+                                            <div class="card">
+                                                <div class="card-body mt-3 mb-0 pb-0">
+                                                    <form class="row g-3">
+                                                        <div class="col-md-6"><label for="nome" class="form-label">Nome</label> <input type="text" class="form-control" id="nome" placeholder="Nome" required></div>
+                                                        <div class="col-md-6"><label for="sobrenome" class="form-label">Sobrenome</label> <input type="text" class="form-control" id="sobrenome" placeholder="Sobrenome" required></div>
+                                                        <div class="col-md-6"><label for="cpf" class="form-label">CPF</label> <input type="text" class="form-control" id="cpf" required></div>
+                                                        <div class="col-md-6"><label for="data_nascimento" class="form-label">Data de Nascimento</label> <input type="text" class="form-control" id="data_nascimento_fisica_ed" required></div>
+                                                        <div class="col-md-6">
+                                                            <label for="email" >Email</label>
+                                                            <div class="input-group mt-0">
+                                                                <div class="input-group-text">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </div>
+                                                                <input type="email" class="form-control" name="email" placeholder="Insira seu Email"  required/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6"><label for="telefone">Telefone</label> <input data-parsley-type="number" type="text" id="telefone" class="form-control" required placeholder="Somente números" /></div>
+                                                        <div class="col-md-2"><label for="cep" class="form-label">CEP</label> <input type="text" class="form-control" id="cep" required/></div>
+                                                        <div class="col-md-6"><label for="endereco" class="form-label">Endereço</label> <input type="text" class="form-control" id="endereco" required placeholder="Rua" /></div>
+                                                        <div class="col-md-2"><label for="numero" class="form-label">Número</label> <input type="text" class="form-control" id="numero" required /></div>
+                                                        <div class="col-md-2"><label for="complemento" class="form-label">Complemento</label> <input type="text" class="form-control" id="complemento" /></div>
+                                                        <div class="col-md-4"><label for="bairro" class="form-label">Bairro</label> <input type="text" class="form-control" id="bairro" required /></div>
+                                                        <div class="col-md-4"><label for="cidade" class="form-label">Cidade</label> <input type="text" class="form-control" id="cidade" required/></div>
+                                                        <div class="dropup col-md-4">
+                                                            <label for="estados" class="form-label">Estado</label>
+                                                            <select id="estados" name="estados" class="form-select estado-select" required="required">
+                                                                <option selected="selected">Selecione</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="modal-footer mt-5 pt-4 pb-1">
+                                                            <button type="submit" class="btn btn-primary btn-widest btn-lg float-end">Salvar</button>
+                                                            <button data-bs-dismiss="modal" class="btn btn-outline-danger btn-widest btn-lg float-end">Cancelar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-content" id="modalEditClienteJuridica"  >
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Editar Cliente - Pessoa Jurídica</h4><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">    
+                                        <div class="col-xl-12" >
+                                            <div class="card">
+                                                <div class="card-body mt-3 mb-0 pb-0">
+                                                    <form class="row g-3">
+                                                        <div class="col-md-6"><label for="razao_social" class="form-label">Razão Social</label> <input type="text" class="form-control" id="razao_social" required></div>
+                                                        <div class="col-md-6"><label for="nome_fantasia" class="form-label">Nome Fantasia</label> <input type="text" class="form-control" id="nome_fantasia" required></div>
+                                                        <div class="col-md-6"><label for="cnpj" class="form-label">CNPJ</label> <input type="text" class="form-control" id="cnpj" required></div>
+                                                        <div class="col-md-6"><label for="data_fundacao" class="form-label">Data de Fundação</label> <input type="text" class="form-control" id="data_fundacao_juridica_ed" required></div>
+                                                        <div class="col-md-6">
+                                                            <label for="email" >Email</label>
+                                                            <div class="input-group mt-0">
+                                                                <div class="input-group-text">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </div>
+                                                                <input type="email" class="form-control" name="email" placeholder="Insira seu Email"  required/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6"><label for="telefone">Telefone</label> <input data-parsley-type="number" type="text" id="telefone" class="form-control" required placeholder="Somente números" /></div>
+                                                        <div class="col-md-2"><label for="cep" class="form-label">CEP</label> <input type="text" class="form-control" id="cep" required /></div>
+                                                        <div class="col-md-6"><label for="endereco" class="form-label">Endereço</label> <input type="text" class="form-control" id="endereco" placeholder="Rua" required/></div>
+                                                        <div class="col-md-2"><label for="numero" class="form-label">Número</label> <input type="text" class="form-control" id="numero"  required/></div>
+                                                        <div class="col-md-2"><label for="complemento" class="form-label">Complemento</label> <input type="text" class="form-control" id="complemento" /></div>
+                                                        <div class="col-md-4"><label for="bairro" class="form-label">Bairro</label> <input type="text" class="form-control" id="bairro" required/></div>
+                                                        <div class="col-md-4"><label for="cidade" class="form-label">Cidade</label> <input type="text" class="form-control" id="cidade" required/></div>
+                                                        <div class="dropup col-md-4">
+                                                            <label for="estados" class="form-label">Estado</label>
+                                                            <select id="estados" name="estados" class="form-select estado-select" required="required">
+                                                                <option selected="selected">Selecione</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="modal-footer mt-5 pt-4 pb-1">
+                                                            <button type="submit" class="btn btn-primary btn-widest btn-lg float-end">Salvar</button>
+                                                            <button data-bs-dismiss="modal" class="btn btn-outline-danger btn-widest btn-lg float-end">Cancelar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div><!-- end card body-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalMostrarCliente">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content" id="modalMostrarClienteFisica" style="display: none;">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Nome do Cliente - Pessoa Física</h4><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="col-xl-12" >
+                                            <div class="card">
+                                                <div class="card-body mt-3 mb-0 pb-0">
+                                                    <form class="row g-3">
+                                                        <div class="col-md-6"><label for="nome" class="form-label">Nome</label> <input type="text" class="form-control" id="nome" placeholder="Nome" readonly></div>
+                                                        <div class="col-md-6"><label for="sobrenome" class="form-label">Sobrenome</label> <input type="text" class="form-control" id="sobrenome" placeholder="Sobrenome" readonly></div>
+                                                        <div class="col-md-6"><label for="cpf" class="form-label">CPF</label> <input type="text" class="form-control" id="cpf" readonly></div>
+                                                        <div class="col-md-6"><label for="data_nascimento" class="form-label">Data de Nascimento</label> <input type="text" class="form-control" id="datepicker-1" readonly></div>
+                                                        <div class="col-md-6">
+                                                            <label for="email" >Email</label>
+                                                            <div class="input-group mt-0">
+                                                                <div class="input-group-text">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </div>
+                                                                <input type="email" class="form-control" name="email" placeholder="Insira seu Email"  readonly/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6"><label for="telefone">Telefone</label> <input data-parsley-type="number" type="text" id="telefone" class="form-control" readonly placeholder="Somente números" /></div>
+                                                        <div class="col-md-2"><label for="cep" class="form-label">CEP</label> <input type="text" class="form-control" id="cep" readonly/></div>
+                                                        <div class="col-md-6"><label for="endereco" class="form-label">Endereço</label> <input type="text" class="form-control" id="endereco" readonly placeholder="Rua" /></div>
+                                                        <div class="col-md-2"><label for="numero" class="form-label">Número</label> <input type="text" class="form-control" id="numero" readonly /></div>
+                                                        <div class="col-md-2"><label for="complemento" class="form-label">Complemento</label> <input type="text" class="form-control" id="complemento" readonly/></div>
+                                                        <div class="col-md-4"><label for="bairro" class="form-label">Bairro</label> <input type="text" class="form-control" id="bairro" readonly /></div>
+                                                        <div class="col-md-4"><label for="cidade" class="form-label">Cidade</label> <input type="text" class="form-control" id="cidade" readonly/></div>
+                                                        <div class="dropup col-md-4">
+                                                            <label for="estados" class="form-label">Estado</label>
+                                                            <select id="estados" name="estados" class="form-select estado-select" required="readonly">
+                                                                <option selected="selected">Selecione</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="modal-footer mt-5 pt-4 pb-1">
+                                                            <button data-bs-dismiss="modal" class="btn btn-outline-danger btn-widest btn-lg float-end">Cancelar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-content" id="modalMostrarClienteJuridica">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Nome do Cliente - Pessoa Jurídica</h4><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="col-xl-12" >
+                                            <div class="card">
+                                                <div class="card-body mt-3 mb-0 pb-0">
+                                                    <form class="row g-3">
+                                                        <div class="col-md-6"><label for="razao_social" class="form-label">Razão Social</label> <input type="text" class="form-control" id="razao_social" readonly></div>
+                                                        <div class="col-md-6"><label for="nome_fantasia" class="form-label">Nome Fantasia</label> <input type="text" class="form-control" id="nome_fantasia" readonly></div>
+                                                        <div class="col-md-6"><label for="cnpj" class="form-label">CNPJ</label> <input type="text" class="form-control" id="cnpj" readonly></div>
+                                                        <div class="col-md-6"><label for="data_fundacao" class="form-label">Data de Fundação</label> <input type="text" class="form-control" id="datepicker-1" readonly></div>
+                                                        <div class="col-md-6">
+                                                            <label for="email" >Email</label>
+                                                            <div class="input-group mt-0">
+                                                                <div class="input-group-text">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </div>
+                                                                <input type="email" class="form-control" name="email" placeholder="Insira seu Email"  readonly/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6"><label for="telefone">Telefone</label> <input data-parsley-type="number" type="text" id="telefone" class="form-control" readonly placeholder="Somente números" /></div>
+                                                        <div class="col-md-2"><label for="cep" class="form-label">CEP</label> <input type="text" class="form-control" id="cep" readonly /></div>
+                                                        <div class="col-md-6"><label for="endereco" class="form-label">Endereço</label> <input type="text" class="form-control" id="endereco" placeholder="Rua" readonly/></div>
+                                                        <div class="col-md-2"><label for="numero" class="form-label">Número</label> <input type="text" class="form-control" id="numero"  readonly/></div>
+                                                        <div class="col-md-2"><label for="complemento" class="form-label">Complemento</label> <input type="text" class="form-control" id="complemento" readonly /></div>
+                                                        <div class="col-md-4"><label for="bairro" class="form-label">Bairro</label> <input type="text" class="form-control" id="bairro" readonly/></div>
+                                                        <div class="col-md-4"><label for="cidade" class="form-label">Cidade</label> <input type="text" class="form-control" id="cidade" readonly/></div>
+                                                        <div class="dropup col-md-4">
+                                                            <label for="estados" class="form-label">Estado</label>
+                                                            <select id="estados" name="estados" class="form-select estado-select" required="required">
+                                                                <option selected="selected">Selecione</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="modal-footer mt-5 pt-4 pb-1">
+                                                            <button data-bs-dismiss="modal" class="btn btn-outline-danger btn-widest btn-lg float-end">Cancelar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div><!-- end card body-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalExcluirCliente">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Tem certeza que deseja excluir esse cliente?</h3><button type="button" class="btn btn-sm btn-label-danger  btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-footer"><button class="btn btn-primary btn-widest btn-lg float-end">Sim</button> <button class="btn btn-outline-danger btn-widest btn-lg float-end" data-bs-dismiss="modal">Cancelar</button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalBloquearCliente">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Tem certeza que deseja bloquear esse cliente?</h3><button type="button" class="btn btn-sm btn-label-danger btn-icon" data-bs-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                </div>
+                                <div class="modal-footer"><button class="btn btn-primary btn-widest btn-lg float-end">Sim</button> <button class="btn btn-outline-danger btn-widest btn-lg float-end" data-bs-dismiss="modal">Cancelar</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <script>document.write(new Date().getFullYear())</script> © N Soluções Tecnologia.
+                        </div>
+                        <div class="col-sm-6" style="display: none;">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="http://codebucks.in/" target="_blank" class="text-muted">Codebucks</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- end main content-->
+    </div>
+    <!-- END layout-wrapper -->    
+    
+    <!-- Rightbar Sidebar -->
+    <div class="offcanvas offcanvas-end" id="offcanvas-rightsidabar">
+        <div class="card h-100 rounded-0" data-simplebar="init">
+            <div class="card-header bg-light">
+                <h6 class="card-title text-uppercase">Activities</h6>
+                <div class="card-addon">
+                    <button class="btn btn-label-danger" data-bs-dismiss="offcanvas">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="">
+                    <h3 class="card-title">Company summary</h3>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Server Load</p>
+                        <h4 class="fs-16 mb-2">489</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-success" style="width: 49.4%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">49.4% <span>Avg</span></p>
+                    </div>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Members online</p>
+                        <h4 class="fs-16 mb-2">3,450</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-danger" style="width: 34.6%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">34.6% <span>Avg</span></p>
+                    </div>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Today's revenue</p>
+                        <h4 class="fs-16 mb-2">$18,390</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-warning" style="width: 20%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">$37,578 <span>Avg</span></p>
+                    </div>
+                    <div class="border rounded p-2">
+                        <p class="text-muted mb-2">Expected profit</p>
+                        <h4 class="fs-16 mb-2">$23,461</h4>
+                        <div class="progress progress-sm" style="height:4px;">
+                            <div class="progress-bar bg-info" style="width: 60%"></div>
+                        </div>
+                        <p class="text-muted mb-0 mt-1">$23,461 <span>Avg</span></p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h3 class="card-title">Latest log</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-primary"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">12 new users registered</p>
+                                    <span class="text-muted">Just now</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-success"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">System shutdown <span class="badge badge-label-success">pending</span></p>
+                                    <span class="text-muted">2 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-primary"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">New invoice received</p>
+                                    <span class="text-muted">3 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-danger"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">New order received <span class="badge badge-label-danger">urgent</span></p>
+                                    <span class="text-muted">10 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-warning"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">Production server down</p>
+                                    <span class="text-muted">1 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-info"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">System error <a href="#">check</a></p>
+                                    <span class="text-muted">2 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-secondary"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">DB overloaded 80%</p>
+                                    <span class="text-muted">5 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-pin"><i class="marker marker-dot text-success"></i></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0">Production server up</p>
+                                    <span class="text-muted">6 hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h3 class="card-title">Upcoming activities</h3>
+                    <div class="timeline timeline-timed">
+                        <div class="timeline-item">
+                            <span class="timeline-time">10:00</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-primary"></i></div>
+                            <div class="timeline-content">
+                                <div>
+                                    <span>Meeting with</span>
+                                    <div class="avatar-group ms-2">
+                                        <div class="avatar avatar-circle">
+                                            <img src="assets/images/users/avatar-1.png" alt="Avatar image" class="avatar-2xs" />
+                                        </div>
+                                        <div class="avatar avatar-circle">
+                                            <img src="assets/images/users/avatar-2.png" alt="Avatar image" class="avatar-2xs" />
+                                        </div>
+                                        <div class="avatar avatar-circle">
+                                            <img src="assets/images/users/avatar-3.png" alt="Avatar image" class="avatar-2xs" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">12:45</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-warning"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Lorem ipsum dolor sit amit,consectetur eiusmdd tempor incididunt ut labore et dolore magna elit enim at minim veniam quis nostrud</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">14:00</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-danger"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Received a new feedback on <a href="#">GoFinance</a> App product.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">15:20</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-success"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Lorem ipsum dolor sit amit,consectetur eiusmdd tempor incididunt ut labore et dolore magna.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-time">17:00</span>
+                            <div class="timeline-pin"><i class="marker marker-circle text-info"></i></div>
+                            <div class="timeline-content">
+                                <p class="mb-0">Make Deposit <a href="#">USD 700</a> o ESL.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end card-->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
+
+    <!-- Required datatable js -->
+    <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- Responsive examples -->
+    <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+
+    <!-- Datatable init js -->
+   <!--  <script src="assets/js/pages/datatables-base.init.js"></script>-->
+    <script>
+    $(document).ready(function(){$("#datatable").DataTable({language:{paginate:{previous:"<i class='mdi mdi-chevron-left'>",next:"<i class='mdi mdi-chevron-right'>"}},drawCallback:function(){$(".dataTables_paginate > .pagination").addClass("pagination")}}),$("#scroll-sidebar-datatable").DataTable({scrollY:"350px",scrollCollapse:!0,paging:!0,language:{paginate:{previous:"<i class='mdi mdi-chevron-left'>",next:"<i class='mdi mdi-chevron-right'>"}},drawCallback:function(){$(".dataTables_paginate > .pagination").addClass("pagination")}}),$("#alternative-page-datatable").DataTable({
+        "order": [
+            [0, "asc"]
+        ],
+        "buttons": ["excel", "pdf"],
+        "language": {
+            "zeroRecords": "Nada encontrado- refaça sua busca",
+            "info": "10/1000",
+            "infoFiltered": "(filtrado MAX dos registros totais)",
+            "sSearch": "Procurar:",
+            "searchPlaceholder": "Digite sua busca",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Próximo",
+            }
+        },
+        pagingType:"simple_numbers",drawCallback:function(){$(".dataTables_paginate > .pagination").addClass("pagination"),$(".dataTables_length select").addClass("form-select form-select-sm")}}),$("#datatable-1").DataTable({responsive:!0,lengthMenu:[[5,10,25,50,-1],[5,10,25,50,"All"]]}),$(".dataTables_length select").addClass("form-select form-select-sm")});
+
+    </script>
+    <script src="assets/js/function.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <!-- Bootstrap datepicker -->
+    <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="assets/js/pages/form-datepicker.init.js"></script>
+    </body>
+
+</html>

@@ -1,0 +1,45 @@
+<x-templates.main title="Perfil">
+    <x-organisms.page-header subTitle="Detalhes do seu Perfil"/>
+    <div x-data="{
+        userForm: formComponent(),
+        deleteUserForm: formComponent(),
+        statusUserForm: formComponent(),
+        modalUser: @if ($errors->hasBag('form')) true @else false @endif,
+        userName: '',
+     }" x-init="
+            if (modalUser) new bootstrap.Modal($refs.modal_user).show();
+            $refs.modal_user.addEventListener('hidden.bs.modal', () => userForm.resetForm());
+        ">
+        <div class="row">
+            <div class="col-12">
+                <x-organisms.card>
+                    <x-molecules.card-body>
+                        <div class="col-12">
+                            <x-atoms.alert></x-atoms.alert>
+                            <x-organisms.user-form class="row g-3"/>
+                        </div>
+                    </x-molecules.card-body>
+                </x-organisms.card>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <x-organisms.user-change-password-form class="row g-3"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <x-organisms.modal id="confirm-deactivate-modal" title="Confirmar Desativação">
+            <x-organisms.form id="deactivate-user-form" x-bind:action="statusUserForm.action">
+                <x-atoms.text>Tem certeza que deseja desativar o usuário <strong x-text="userName"></strong>?
+                </x-atoms.text>
+            </x-organisms.form>
+            <x-slot:footer>
+                <x-atoms.button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancelar</x-atoms.button>
+                <x-atoms.button type="submit" class="btn-success" form="deactivate-user-form">Desativar</x-atoms.button>
+            </x-slot:footer>
+        </x-organisms.modal>
+    </div>
+</x-templates.main>
