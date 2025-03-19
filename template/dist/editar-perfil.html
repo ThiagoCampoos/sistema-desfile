@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil</title>
+    <!-- Bootstrap Css -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="layout-wrapper">
+        <!-- Start topbar -->
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <!-- Logo -->
+                <div class="navbar-logo-box">
+                    <a href="index.html" class="logo logo-dark">
+                        <span class="logo-sm">
+                            <img src="assets/images/logo2.png" alt="logo-sm-dark" width="100">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="assets/images/logo2.png" alt="logo-dark" width="100">
+                        </span>
+                    </a>
+
+                    <a href="index.html" class="logo logo-light">
+                        <span class="logo-sm">
+                            <img src="assets/images/logo2.png" alt="logo-sm-light" width="100">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="assets/images/logo2.png" alt="logo-light" width="100">
+                        </span>
+                    </a>
+
+                    <button type="button" class="btn btn-sm top-icon sidebar-btn" id="sidebar-btn">
+                        <i class="mdi mdi-menu-open align-middle fs-19"></i>
+                    </button>
+                </div>
+
+                <!-- Start menu -->
+                <div class="d-flex justify-content-between menu-sm px-3 ms-auto">
+                    <div class="d-flex align-items-center gap-2">
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <!-- Start Profile -->
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn btn-sm top-icon p-0" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="rounded avatar-2xs p-0" src="assets/images/users/avatar-6.png" alt="Header Avatar">
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-wide dropdown-menu-end dropdown-menu-animated overflow-hidden py-0">
+                                <div class="card border-0">
+                                    <div class="card-header bg-primary rounded-0">
+                                        <div class="rich-list-item w-100 p-0">
+                                            <div class="rich-list-prepend">
+                                                <div class="avatar avatar-label-light avatar-circle">
+                                                    <div class="avatar-display"><i class="fa fa-user-alt"></i></div>
+                                                </div>
+                                            </div>
+                                            <div class="rich-list-content">
+                                                <h3 class="rich-list-title text-white">Sua Conta</h3>
+                                                <span class="rich-list-subtitle text-white">email@email.com</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer card-footer-bordered rounded-0">
+                                        <a href="apps-contact.html" class="btn btn-label-primary m-2 mt-3">
+                                            <i class="far fa-address-card"></i>
+                                            <span>Perfil</span>
+                                        </a>
+                                        <a href="auth-login.html" class="btn btn-label-danger m-2 mt-3">
+                                            <i class="fas fa-sign-out-alt me-1"></i>Sair
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="sidebar-left">
+            <div data-simplebar class="h-100">
+                <div id="sidebar-menu">
+                    <ul class="left-menu list-unstyled" id="side-menu">
+                        <li>
+                            <a href="index.html">
+                                <i class="fas fa-desktop"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li><a href="listagem_clientes.html"><i class="fas fa-address-card"></i> <span>Lista de Clientes</span></a></li>
+                        <li><a href="listagem_usuarios.html"><i class="fas fa-users"></i> <span>Lista de Usuários</span></a></li>
+                        <li><a href="listagem_nf.html"><i class="fas fa-folder-open"></i> <span>Notas Fiscais</span></a></li>
+                        <li><a href="revisional.html"><i class="fas fa-clipboard-list"></i> <span>Revisional</span></a></li>
+                        <li><a href="detalhes_cliente.html"><i class="fas fa-user"></i> <span>Detalhes do Cliente</span></a></li>
+                        <li><a href="analise_nf.html"><i class="fas fa-table"></i> <span>Análise de Nota Fiscal</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start right Content here -->
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid mt-5">
+                    <h2>Editar Perfil</h2>
+                    <form id="edit-profile-form">
+                        <div class="form-group">
+                            <label for="nomeSocial">Nome Social</label>
+                            <input type="text" class="form-control" id="nomeSocial" value="João">
+                        </div>
+                        <div class="form-group">
+                            <label for="dataNascimento">Data de Nascimento</label>
+                            <input type="date" class="form-control" id="dataNascimento" value="1985-05-15">
+                        </div>
+                        <div class="form-group">
+                            <label for="escolaridade">Escolaridade</label>
+                            <input type="text" class="form-control" id="escolaridade" value="Ensino Superior Completo">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" class="form-control" id="email" value="joao.silva@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" class="form-control" id="telefone" value="(11) 3456-7890">
+                        </div>
+                        <div class="form-group">
+                            <label for="facebook">Facebook</label>
+                            <input type="text" class="form-control" id="facebook" value="@joaosilva">
+                        </div>
+                        <div class="form-group">
+                            <label for="instagram">Instagram</label>
+                            <input type="text" class="form-control" id="instagram" value="@joao.silva">
+                        </div>
+                        <div class="form-group">
+                            <label for="tiktok">TikTok</label>
+                            <input type="text" class="form-control" id="tiktok" value="@joaosilva_oficial">
+                        </div>
+                        <div class="form-group">
+                            <label for="kwai">Kwai</label>
+                            <input type="text" class="form-control" id="kwai" value="@joao.silva.kwai">
+                        </div>
+                        <div class="form-group">
+                            <label for="whatsapp">WhatsApp</label>
+                            <input type="text" class="form-control" id="whatsapp" value="(11) 98765-4321">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                        <a href="apps-contact.html" class="btn btn-secondary">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

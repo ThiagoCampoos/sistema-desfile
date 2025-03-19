@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações de Perfil</title>
+    <!-- Bootstrap Css -->
+    <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- simplebar css -->
+    <link href="assets/libs/simplebar/simplebar.min.css" rel="stylesheet">
+    <!-- App Css-->
+    <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="layout-wrapper">
+        <!-- Start topbar -->
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <!-- Logo -->
+                <div class="navbar-logo-box">
+                    <a href="index.html" class="logo logo-dark">
+                        <span class="logo-sm">
+                            <img src="assets/images/logo2.png" alt="logo-sm-dark" width="100">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="assets/images/logo2.png" alt="logo-dark" width="100">
+                        </span>
+                    </a>
+
+                    <a href="index.html" class="logo logo-light">
+                        <span class="logo-sm">
+                            <img src="assets/images/logo2.png" alt="logo-sm-light" width="100">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="assets/images/logo2.png" alt="logo-light" width="100">
+                        </span>
+                    </a>
+
+                    <button type="button" class="btn btn-sm top-icon sidebar-btn" id="sidebar-btn">
+                        <i class="mdi mdi-menu-open align-middle fs-19"></i>
+                    </button>
+                </div>
+
+                <!-- Start menu -->
+                <div class="d-flex justify-content-between menu-sm px-3 ms-auto">
+                    <div class="d-flex align-items-center gap-2">
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <!-- Start Profile -->
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn btn-sm top-icon p-0" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="rounded avatar-2xs p-0" src="assets/images/users/avatar-6.png" alt="Header Avatar">
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-wide dropdown-menu-end dropdown-menu-animated overflow-hidden py-0">
+                                <div class="card border-0">
+                                    <div class="card-header bg-primary rounded-0">
+                                        <div class="rich-list-item w-100 p-0">
+                                            <div class="rich-list-prepend">
+                                                <div class="avatar avatar-label-light avatar-circle">
+                                                    <div class="avatar-display"><i class="fa fa-user-alt"></i></div>
+                                                </div>
+                                            </div>
+                                            <div class="rich-list-content">
+                                                <h3 class="rich-list-title text-white">Sua Conta</h3>
+                                                <span class="rich-list-subtitle text-white">email@email.com</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer card-footer-bordered rounded-0">
+                                        <a href="apps-contact.html" class="btn btn-label-primary m-2 mt-3">
+                                            <i class="far fa-address-card"></i>
+                                            <span>Perfil</span>
+                                        </a>
+                                        <a href="auth-login.html" class="btn btn-label-danger m-2 mt-3">
+                                            <i class="fas fa-sign-out-alt me-1"></i>Sair
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="sidebar-left">
+            <div data-simplebar class="h-100">
+                <div id="sidebar-menu">
+                    <ul class="left-menu list-unstyled" id="side-menu">
+                        <li>
+                            <a href="index.html">
+                                <i class="fas fa-desktop"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li><a href="listagem_clientes.html"><i class="fas fa-address-card"></i> <span>Lista de Clientes</span></a></li>
+                        <li><a href="listagem_usuarios.html"><i class="fas fa-users"></i> <span>Lista de Usuários</span></a></li>
+                        <li><a href="listagem_nf.html"><i class="fas fa-folder-open"></i> <span>Notas Fiscais</span></a></li>
+                        <li><a href="revisional.html"><i class="fas fa-clipboard-list"></i> <span>Revisional</span></a></li>
+                        <li><a href="detalhes_cliente.html"><i class="fas fa-user"></i> <span>Detalhes do Cliente</span></a></li>
+                        <li><a href="analise_nf.html"><i class="fas fa-table"></i> <span>Análise de Nota Fiscal</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start right Content here -->
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <div class="profile-container">
+                        <div class="profile-header">
+                            <div class="profile-avatar">
+                                <img src="assets/images/users/avatar-6.png" alt="Foto de Perfil">
+                            </div>
+                            <div class="profile-info">
+                                <h2>João da Silva</h2>
+                                <p>Usuário desde: Maio de 2023</p>
+                            </div>
+                            <div class="profile-actions">
+                                <button class="btn-edit" id="btn-edit-profile" onclick="window.location.href='editar-perfil.html'">
+                                    <i class="fas fa-pencil-alt"></i> Editar Perfil
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="info-container">
+                            <div class="info-section">
+                                <h3>Informações Pessoais</h3>
+                                <div class="info-row">
+                                    <div class="info-label">Nome Social:</div>
+                                    <div class="info-value">João</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-label">Data de Nascimento:</div>
+                                    <div class="info-value">15/05/1985</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-label">Escolaridade:</div>
+                                    <div class="info-value">Ensino Superior Completo</div>
+                                </div>
+                            </div>
+
+                            <div class="info-section">
+                                <h3>Histórico de Desfiles e Concursos</h3>
+                                <div class="contest-history">
+                                    <div class="contest-item">
+                                        <div class="contest-header">
+                                            <div class="contest-name">Desfile de Verão 2023</div>
+                                            <div class="contest-date">12/01/2023</div>
+                                            <div class="contest-badge winner">Vencedor</div>
+                                        </div>
+                                        <div class="contest-details">
+                                            <p>Categoria: Traje de Banho</p>
+                                            <p>Pontuação: 9.8/10</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="contest-item">
+                                        <div class="contest-header">
+                                            <div class="contest-name">Fashion Week Regional</div>
+                                            <div class="contest-date">05/06/2022</div>
+                                            <div class="contest-badge finalist">Finalista</div>
+                                        </div>
+                                        <div class="contest-details">
+                                            <p>Categoria: Moda Casual</p>
+                                            <p>Pontuação: 8.5/10</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="contest-item">
+                                        <div class="contest-header">
+                                            <div class="contest-name">Concurso Moda Inverno</div>
+                                            <div class="contest-date">18/07/2021</div>
+                                            <div class="contest-badge">Participante</div>
+                                        </div>
+                                        <div class="contest-details">
+                                            <p>Categoria: Alta Costura</p>
+                                            <p>Pontuação: 7.9/10</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-section">
+                                <h3>Histórico de Votações</h3>
+                                <div class="voting-history">
+                                    <div class="voting-statistics">
+                                        <div class="stat-item">
+                                            <div class="stat-value">873</div>
+                                            <div class="stat-label">Total de Votos Recebidos</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-value">4.7/5.0</div>
+                                            <div class="stat-label">Avaliação Média</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-value">12</div>
+                                            <div class="stat-label">Competições Julgadas</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="voting-chart">
+                                        <h4>Desempenho nas Últimas Votações</h4>
+                                        <div class="chart-container">
+                                            <div class="chart-bar" style="height: 65%;">
+                                                <span class="chart-label">Jan</span>
+                                            </div>
+                                            <div class="chart-bar" style="height: 80%;">
+                                                <span class="chart-label">Fev</span>
+                                            </div>
+                                            <div class="chart-bar" style="height: 75%;">
+                                                <span class="chart-label">Mar</span>
+                                            </div>
+                                            <div class="chart-bar" style="height: 90%;">
+                                                <span class="chart-label">Abr</span>
+                                            </div>
+                                            <div class="chart-bar" style="height: 85%;">
+                                                <span class="chart-label">Mai</span>
+                                            </div>
+                                            <div class="chart-bar" style="height: 95%;">
+                                                <span class="chart-label">Jun</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="recent-votes">
+                                        <h4>Votações Recentes</h4>
+                                        <div class="vote-item">
+                                            <div class="vote-event">Desfile Primavera 2023</div>
+                                            <div class="vote-score">92 votos (1º lugar)</div>
+                                            <div class="vote-date">10/06/2023</div>
+                                        </div>
+                                        <div class="vote-item">
+                                            <div class="vote-event">Fashion Night Out</div>
+                                            <div class="vote-score">78 votos (2º lugar)</div>
+                                            <div class="vote-date">25/05/2023</div>
+                                        </div>
+                                        <div class="vote-item">
+                                            <div class="vote-event">Concurso Novos Talentos</div>
+                                            <div class="vote-score">65 votos (3º lugar)</div>
+                                            <div class="vote-date">12/04/2023</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-section">
+                                <h3>Redes Sociais</h3>
+                                <div class="info-row">
+                                    <div class="info-label"><i class="fab fa-facebook"></i> Facebook:</div>
+                                    <div class="info-value">@joaosilva</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-label"><i class="fab fa-instagram"></i> Instagram:</div>
+                                    <div class="info-value">@joao.silva</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-label"><i class="fab fa-tiktok"></i> TikTok:</div>
+                                    <div class="info-value">@joaosilva_oficial</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-label"><i class="fas fa-mobile-alt"></i> Kwai:</div>
+                                    <div class="info-value">@joao.silva.kwai</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-label"><i class="fab fa-whatsapp"></i> WhatsApp:</div>
+                                    <div class="info-value">(11) 98765-4321</div>
+                                </div>
+                            </div>
+
+                            <div class="info-section">
+                                <h3>Outras Informações</h3>
+                                <div class="info-row">
+                                    <div class="info-label">E-mail:</div>
+                                    <div class="info-value">joao.silva@email.com</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-label">Telefone:</div>
+                                    <div class="info-value">(11) 3456-7890</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="button-group">
+                            <a href="index.html" class="btn-back">Voltar para Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <script>
+        document.getElementById('btn-edit-profile').addEventListener('click', function() {
+            // Código para redirecionar para página de edição ou mostrar formulário de edição
+            window.location.href = 'editar-perfil.html';
+        });
+    </script>
+</body>
+</html>
