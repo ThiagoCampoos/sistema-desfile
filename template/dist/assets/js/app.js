@@ -18,3 +18,40 @@ document.addEventListener("DOMContentLoaded", function () {
         clientTable.style.display = "table";
     });
 });
+
+// Adicione esse código no arquivo app.js ou em um script interno
+document.addEventListener('DOMContentLoaded', function() {
+    // Referência ao botão de alternância da sidebar
+    var sidebarBtn = document.getElementById('sidebar-btn');
+    
+    // Verificar se o botão existe
+    if (sidebarBtn) {
+        // Adicionar listener de clique
+        sidebarBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alternar classe no body para mostrar/ocultar sidebar
+            document.body.classList.toggle('sidebar-enable');
+            
+            // Em telas maiores, também alternar tamanho
+            if (window.innerWidth >= 992) {
+                document.body.classList.toggle('sidebar-collapsed');
+            }
+        });
+        
+        // Garantir que o botão está visível
+        sidebarBtn.style.display = 'flex';
+        sidebarBtn.style.visibility = 'visible';
+        sidebarBtn.style.opacity = '1';
+    }
+    
+    // Fechar sidebar quando clicar fora dela em dispositivos móveis
+    document.addEventListener('click', function(e) {
+        // Verificar se estamos em viewport mobile e sidebar está aberta
+        if (window.innerWidth < 992 && document.body.classList.contains('sidebar-enable')) {
+            // Verificar se o clique foi fora da sidebar e não no botão de toggle
+            if (!e.target.closest('.sidebar-left') && !e.target.closest('#sidebar-btn')) {
+                document.body.classList.remove('sidebar-enable');
+            }
+        }
+    });
+});

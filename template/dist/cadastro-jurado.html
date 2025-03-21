@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Jurado</title>
+    <!-- Bootstrap Css -->
+    <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- simplebar css -->
+    <link href="assets/libs/simplebar/simplebar.min.css" rel="stylesheet">
+    <!-- App Css-->
+    <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="layout-wrapper">
+        <!-- Start topbar -->
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <!-- Logo -->
+                <div class="navbar-logo-box">
+                    <a href="index.html" class="logo logo-dark">
+                        <span class="logo-sm">
+                            <img src="assets/images/logo2.png" alt="logo-sm-dark" width="100">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="assets/images/logo2.png" alt="logo-dark" width="100">
+                        </span>
+                    </a>
+
+                    <a href="index.html" class="logo logo-light">
+                        <span class="logo-sm">
+                            <img src="assets/images/logo2.png" alt="logo-sm-light" width="100">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="assets/images/logo2.png" alt="logo-light" width="100">
+                        </span>
+                    </a>
+
+                    <button type="button" class="btn btn-sm top-icon sidebar-btn" id="sidebar-btn">
+                        <i class="mdi mdi-menu-open align-middle fs-19"></i>
+                    </button>
+                </div>
+
+                <!-- Start menu -->
+                <div class="d-flex justify-content-between menu-sm px-3 ms-auto">
+                    <div class="d-flex align-items-center gap-2">
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <!-- Start Profile -->
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn btn-sm top-icon p-0" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="rounded avatar-2xs p-0" src="assets/images/users/avatar-6.png" alt="Header Avatar">
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-wide dropdown-menu-end dropdown-menu-animated overflow-hidden py-0">
+                                <div class="card border-0">
+                                    <div class="card-header bg-primary rounded-0">
+                                        <div class="rich-list-item w-100 p-0">
+                                            <div class="rich-list-prepend">
+                                                <div class="avatar avatar-label-light avatar-circle">
+                                                    <div class="avatar-display"><i class="fa fa-user-alt"></i></div>
+                                                </div>
+                                            </div>
+                                            <div class="rich-list-content">
+                                                <h3 class="rich-list-title text-white">Sua Conta</h3>
+                                                <span class="rich-list-subtitle text-white">email@email.com</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer card-footer-bordered rounded-0">
+                                        <a href="apps-contact.html" class="btn btn-label-primary m-2 mt-3">
+                                            <i class="far fa-address-card"></i>
+                                            <span>Perfil</span>
+                                        </a>
+                                        <a href="auth-login.html" class="btn btn-label-danger m-2 mt-3">
+                                            <i class="fas fa-sign-out-alt me-1"></i>Sair
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="sidebar-left">
+            <div data-simplebar class="h-100">
+                <div id="sidebar-menu">
+                    <ul class="left-menu list-unstyled" id="side-menu">
+                        <li>
+                            <a href="index.html">
+                                <i class="fas fa-desktop"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li><a href="listagem_clientes.html"><i class="fas fa-address-card"></i> <span>Lista de Clientes</span></a></li>
+                        <li><a href="listagem_usuarios.html"><i class="fas fa-users"></i> <span>Lista de Usuários</span></a></li>
+                        <li><a href="listagem_nf.html"><i class="fas fa-folder-open"></i> <span>Notas Fiscais</span></a></li>
+                        <li><a href="revisional.html"><i class="fas fa-clipboard-list"></i> <span>Revisional</span></a></li>
+                        <li><a href="detalhes_cliente.html"><i class="fas fa-user"></i> <span>Detalhes do Cliente</span></a></li>
+                        <li><a href="analise_nf.html"><i class="fas fa-table"></i> <span>Análise de Nota Fiscal</span></a></li>
+                        <li><a href="listagem_eventos.html"><i class="fas fa-calendar-alt"></i> <span>Lista de Eventos</span></a></li>
+                        <li class="active"><a href="listagem_jurados.html"><i class="fas fa-gavel"></i> <span>Lista de Jurados</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start right Content here -->
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between" style="margin-bottom: 1.5rem; margin-top: 2rem;">
+                                <h4 class="mb-0">Cadastro de Jurado</h4>
+                                <div class="page-title-right">
+                                    <a href="listagem_jurados.html" class="btn btn-secondary waves-effect waves-light">
+                                        <i class="fas fa-arrow-left mr-2"></i> Voltar para Lista
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form id="jurado-form">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="evento" class="form-label">Evento</label>
+                                                    <select class="form-select" id="evento" name="evento" required>
+                                                        <option value="">Selecione um evento</option>
+                                                        <option value="1">Fashion Week 2023</option>
+                                                        <option value="2">Desfile Primavera/Verão</option>
+                                                        <option value="3">Concurso Novos Talentos</option>
+                                                        <option value="4">Fashion Night Out</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="data" class="form-label">Data de Participação</label>
+                                                    <input type="date" class="form-control" id="data" name="data" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="cpf" class="form-label">CPF</label>
+                                                    <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="nome" class="form-label">Nome Completo</label>
+                                                    <input type="text" class="form-control" id="nome" name="nome" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="contato" class="form-label">Telefone de Contato</label>
+                                                    <input type="tel" class="form-control" id="contato" name="contato" placeholder="(00) 00000-0000">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-3">
+                                                    <label for="descricao" class="form-label">Breve Descrição/Biografia</label>
+                                                    <textarea class="form-control" id="descricao" name="descricao" rows="4" required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-3">
+                                                    <label for="foto" class="form-label">Foto do Jurado</label>
+                                                    <input class="form-control" type="file" id="foto" name="foto" accept="image/*">
+                                                    <div class="form-text">Formato recomendado: JPG, PNG. Tamanho máximo: 2MB.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row preview-row" style="display: none;">
+                                            <div class="col-md-12 mb-3">
+                                                <div class="text-center">
+                                                    <img id="preview-foto" src="#" alt="Preview da Foto" class="img-thumbnail" style="max-height: 200px;">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-4">
+                                            <div class="col-12 text-center">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light me-2" id="btn-cadastrar">
+                                                    <i class="fas fa-save me-2"></i>Cadastrar Jurado
+                                                </button>
+                                                <button type="reset" class="btn btn-success waves-effect waves-light me-2">
+                                                    <i class="fas fa-plus me-2"></i>Novo Cadastro
+                                                </button>
+                                                <a href="listagem_jurados.html" class="btn btn-secondary waves-effect waves-light">
+                                                    <i class="fas fa-arrow-left me-2"></i>Voltar
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Sucesso -->
+    <div class="modal fade" id="modalSucesso" tabindex="-1" aria-labelledby="modalSucessoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="modalSucessoLabel">Sucesso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-check-circle text-success" style="font-size: 4rem; margin-bottom: 15px;"></i>
+                    <h4>Cadastro Realizado com Sucesso!</h4>
+                    <p>O jurado foi cadastrado no sistema.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="btnOk">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <script>
+        // Função para visualizar a foto antes do upload
+        document.getElementById('foto').addEventListener('change', function(e) {
+            const previewRow = document.querySelector('.preview-row');
+            const previewImg = document.getElementById('preview-foto');
+            
+            if (e.target.files.length > 0) {
+                previewImg.src = URL.createObjectURL(e.target.files[0]);
+                previewRow.style.display = 'flex';
+            } else {
+                previewRow.style.display = 'none';
+            }
+        });
+
+        // Máscara para CPF
+        document.getElementById('cpf').addEventListener('input', function(e) {
+            let value = e.target.value;
+            value = value.replace(/\D/g, '');
+            
+            if (value.length > 11) {
+                value = value.slice(0, 11);
+            }
+            
+            if (value.length > 9) {
+                value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
+            } else if (value.length > 6) {
+                value = value.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3');
+            } else if (value.length > 3) {
+                value = value.replace(/(\d{3})(\d{1,3})/, '$1.$2');
+            }
+            
+            e.target.value = value;
+        });
+
+        // Máscara para telefone
+        document.getElementById('contato').addEventListener('input', function(e) {
+            let value = e.target.value;
+            value = value.replace(/\D/g, '');
+            
+            if (value.length > 11) {
+                value = value.slice(0, 11);
+            }
+            
+            if (value.length > 10) {
+                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+            } else if (value.length > 6) {
+                value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+            } else if (value.length > 2) {
+                value = value.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+            }
+            
+            e.target.value = value;
+        });
+
+        // Lidar com o envio do formulário
+        document.getElementById('jurado-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Impedir o envio padrão do formulário
+            
+            // Aqui você pode adicionar validações adicionais se necessário
+            
+            // Exibir o modal de sucesso
+            const modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'));
+            modalSucesso.show();
+        });
+
+        // Botão OK do modal
+        document.getElementById('btnOk').addEventListener('click', function() {
+            // Redirecionar para a página de listagem
+            window.location.href = 'listagem_jurados.html';
+        });
+    </script>
+</body>
+</html>

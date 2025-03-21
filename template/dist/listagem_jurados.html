@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Jurados</title>
+    <!-- Bootstrap Css -->
+    <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- simplebar css -->
+    <link href="assets/libs/simplebar/simplebar.min.css" rel="stylesheet">
+    <!-- App Css-->
+    <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Estilos personalizados para corrigir o layout -->
+    <style>
+        /* Estilo específico para tabela */
+        .table th, .table td {
+            padding: 0.65rem;
+            vertical-align: middle;
+        }
+        
+        .action-btns {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .action-btns .btn {
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .table-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        /* Estilos para ocupar mais espaço */
+        .container-fluid {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        
+        .card {
+            margin-bottom: 16px;
+        }
+        
+        .card-body {
+            padding: 15px;
+        }
+        
+        /* Botões de filtro - reduzir tamanho */
+        .col-md-3.d-flex.align-items-end .btn {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Aumentar largura da tabela e melhorar distribuição */
+        .table {
+            width: 100%;
+            margin-bottom: 0;
+        }
+        
+        .table th {
+            white-space: nowrap;
+        }
+        
+        /* Garantir que a tabela ocupe todo o espaço disponível */
+        .table-responsive {
+            overflow-x: auto;
+            min-height: 400px; /* Altura mínima para parecer que ocupa mais espaço */
+        }
+        
+        /* Melhorar espaçamento entre as linhas da tabela */
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body>
+    <div id="layout-wrapper">
+        <!-- Start topbar -->
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <!-- Logo -->
+                <div class="navbar-logo-box">
+                    <a href="index.html" class="logo logo-dark">
+                        <span class="logo-sm">
+                            <img src="assets/images/logo2.png" alt="logo-sm-dark" width="100">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="assets/images/logo2.png" alt="logo-dark" width="100">
+                        </span>
+                    </a>
+
+                    <a href="index.html" class="logo logo-light">
+                        <span class="logo-sm">
+                            <img src="assets/images/logo2.png" alt="logo-sm-light" width="100">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="assets/images/logo2.png" alt="logo-light" width="100">
+                        </span>
+                    </a>
+
+                    <button type="button" class="btn btn-sm top-icon sidebar-btn" id="sidebar-btn">
+                        <i class="mdi mdi-menu-open align-middle fs-19"></i>
+                    </button>
+                </div>
+
+                <!-- Start menu -->
+                <div class="d-flex justify-content-between menu-sm px-3 ms-auto">
+                    <div class="d-flex align-items-center gap-2">
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <!-- Start Profile -->
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn btn-sm top-icon p-0" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="rounded avatar-2xs p-0" src="assets/images/users/avatar-6.png" alt="Header Avatar">
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-wide dropdown-menu-end dropdown-menu-animated overflow-hidden py-0">
+                                <div class="card border-0">
+                                    <div class="card-header bg-primary rounded-0">
+                                        <div class="rich-list-item w-100 p-0">
+                                            <div class="rich-list-prepend">
+                                                <div class="avatar avatar-label-light avatar-circle">
+                                                    <div class="avatar-display"><i class="fa fa-user-alt"></i></div>
+                                                </div>
+                                            </div>
+                                            <div class="rich-list-content">
+                                                <h3 class="rich-list-title text-white">Sua Conta</h3>
+                                                <span class="rich-list-subtitle text-white">email@email.com</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer card-footer-bordered rounded-0">
+                                        <a href="apps-contact.html" class="btn btn-label-primary m-2 mt-3">
+                                            <i class="far fa-address-card"></i>
+                                            <span>Perfil</span>
+                                        </a>
+                                        <a href="auth-login.html" class="btn btn-label-danger m-2 mt-3">
+                                            <i class="fas fa-sign-out-alt me-1"></i>Sair
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="sidebar-left">
+            <div data-simplebar class="h-100">
+                <div id="sidebar-menu">
+                    <ul class="left-menu list-unstyled" id="side-menu">
+                        <li>
+                            <a href="index.html">
+                                <i class="fas fa-desktop"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li><a href="listagem_clientes.html"><i class="fas fa-address-card"></i> <span>Lista de Clientes</span></a></li>
+                        <li><a href="listagem_usuarios.html"><i class="fas fa-users"></i> <span>Lista de Usuários</span></a></li>
+                        <li><a href="listagem_nf.html"><i class="fas fa-folder-open"></i> <span>Notas Fiscais</span></a></li>
+                        <li><a href="revisional.html"><i class="fas fa-clipboard-list"></i> <span>Revisional</span></a></li>
+                        <li><a href="detalhes_cliente.html"><i class="fas fa-user"></i> <span>Detalhes do Cliente</span></a></li>
+                        <li><a href="analise_nf.html"><i class="fas fa-table"></i> <span>Análise de Nota Fiscal</span></a></li>
+                        <li><a href="listagem_eventos.html"><i class="fas fa-calendar-alt"></i> <span>Lista de Eventos</span></a></li>
+                        <li class="active"><a href="listagem_jurados.html"><i class="fas fa-gavel"></i> <span>Lista de Jurados</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start right Content here -->
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    <!-- start page title -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="d-block d-md-flex align-items-center justify-content-between">
+                                <h4 class="mb-3 mb-md-0">Listagem de Jurados</h4>
+                                <div>
+                                    <a href="cadastro-jurado.html" class="btn btn-primary w-100">
+                                        <i class="fas fa-plus me-2"></i> Novo Jurado
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filtros de pesquisa -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form action="#" method="get" class="row g-3">
+                                        <div class="col-md-3">
+                                            <label for="filtro-nome" class="form-label">Nome</label>
+                                            <input type="text" class="form-control" id="filtro-nome" placeholder="Nome do jurado">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="filtro-cpf" class="form-label">CPF</label>
+                                            <input type="text" class="form-control" id="filtro-cpf" placeholder="CPF do jurado">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="filtro-evento" class="form-label">Evento</label>
+                                            <select class="form-select" id="filtro-evento">
+                                                <option value="">Todos os eventos</option>
+                                                <option value="1">Fashion Week 2023</option>
+                                                <option value="2">Desfile Primavera/Verão</option>
+                                                <option value="3">Concurso Novos Talentos</option>
+                                                <option value="4">Fashion Night Out</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 d-flex align-items-end">
+                                            <button type="submit" class="btn btn-primary me-2">
+                                                <i class="fas fa-search me-1"></i> Pesquisar
+                                            </button>
+                                            <button type="reset" class="btn btn-secondary">
+                                                <i class="fas fa-times me-1"></i> Limpar
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Listagem de jurados -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped table-hover mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nome</th>
+                                                    <th>CPF</th>
+                                                    <th>Profissão</th>
+                                                    <th>Evento</th>
+                                                    <th>Contato</th>
+                                                    <th width="120" class="text-center">Ações</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                   
+                                                    <td>Ana Carolina Silva</td>
+                                                    <td>123.456.789-00</td>
+                                                    <td>Estilista</td>
+                                                    <td>Fashion Week 2023</td>
+                                                    <td>(11) 98765-4321</td>
+                                                    <td>
+                                                        <div class="action-btns">
+                                                            <a href="detalhe_jurado.html?id=1" class="btn btn-info btn-sm" title="Visualizar">
+                                                                <i class="fas fa-eye"></i>
+                                                            </a>
+                                                            <a href="editar_jurado.html?id=1" class="btn btn-primary btn-sm" title="Editar">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                            </a>
+                                                            <button type="button" class="btn btn-danger btn-sm" title="Excluir" data-bs-toggle="modal" data-bs-target="#deleteModal1">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                   
+                                                    <td>Roberto Mendes</td>
+                                                    <td>987.654.321-00</td>
+                                                    <td>Fotógrafo</td>
+                                                    <td>Desfile Primavera/Verão</td>
+                                                    <td>(11) 91234-5678</td>
+                                                    <td>
+                                                        <div class="action-btns">
+                                                            <a href="detalhe_jurado.html?id=2" class="btn btn-info btn-sm" title="Visualizar">
+                                                                <i class="fas fa-eye"></i>
+                                                            </a>
+                                                            <a href="editar_jurado.html?id=2" class="btn btn-primary btn-sm" title="Editar">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                            </a>
+                                                            <button type="button" class="btn btn-danger btn-sm" title="Excluir" data-bs-toggle="modal" data-bs-target="#deleteModal2">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    
+                                                    <td>Carla Oliveira</td>
+                                                    <td>456.789.123-00</td>
+                                                    <td>Produtora de Moda</td>
+                                                    <td>Concurso Novos Talentos</td>
+                                                    <td>(11) 98888-7777</td>
+                                                    <td>
+                                                        <div class="action-btns">
+                                                            <a href="detalhe_jurado.html?id=3" class="btn btn-info btn-sm" title="Visualizar">
+                                                                <i class="fas fa-eye"></i>
+                                                            </a>
+                                                            <a href="editar_jurado.html?id=3" class="btn btn-primary btn-sm" title="Editar">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                            </a>
+                                                            <button type="button" class="btn btn-danger btn-sm" title="Excluir" data-bs-toggle="modal" data-bs-target="#deleteModal3">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Paulo Rodrigues</td>
+                                                    <td>789.123.456-00</td>
+                                                    <td>Designer</td>
+                                                    <td>Fashion Night Out</td>
+                                                    <td>(11) 97777-6666</td>
+                                                    <td>
+                                                        <div class="action-btns">
+                                                            <a href="detalhe_jurado.html?id=4" class="btn btn-info btn-sm" title="Visualizar">
+                                                                <i class="fas fa-eye"></i>
+                                                            </a>
+                                                            <a href="editar_jurado.html?id=4" class="btn btn-primary btn-sm" title="Editar">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                            </a>
+                                                            <button type="button" class="btn btn-danger btn-sm" title="Excluir" data-bs-toggle="modal" data-bs-target="#deleteModal4">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- Paginação -->
+                                    <div class="row mt-3">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
+                                                Mostrando 1 a 4 de 4 registros
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item previous disabled" id="dataTable_previous">
+                                                        <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a>
+                                                    </li>
+                                                    <li class="paginate_button page-item active">
+                                                        <a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                                                    </li>
+                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
+                                                        <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">Próximo</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modais de Confirmação de Exclusão -->
+                    <div class="modal fade" id="deleteModal1" tabindex="-1" aria-labelledby="deleteModalLabel1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel1">Confirmar Exclusão</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Tem certeza que deseja excluir o jurado "Ana Carolina Silva"?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-danger">Excluir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="deleteModal2" tabindex="-1" aria-labelledby="deleteModalLabel2" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel2">Confirmar Exclusão</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Tem certeza que deseja excluir o jurado "Roberto Mendes"?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-danger">Excluir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="deleteModal3" tabindex="-1" aria-labelledby="deleteModalLabel3" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel3">Confirmar Exclusão</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Tem certeza que deseja excluir o jurado "Carla Oliveira"?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-danger">Excluir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="deleteModal4" tabindex="-1" aria-labelledby="deleteModalLabel4" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel4">Confirmar Exclusão</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Tem certeza que deseja excluir o jurado "Paulo Rodrigues"?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-danger">Excluir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
